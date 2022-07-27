@@ -1,25 +1,6 @@
-.page{
-  background-color: #000000;
-  max-width: 1280px;
-  margin: auto;
-  font-family: 'Inter','Arial', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-}
 
-.header{
-  max-width: 880px;
-  margin: 45px auto 0;
-  border-bottom: 1px solid #545454;
-}
 
-.header__logo{
-  max-width: 142px;
-  padding-bottom: 41px;
-}
+
 
 .profile{
   max-width: 880px;
@@ -150,7 +131,6 @@
   background-repeat: no-repeat;
   background-position: center;
   background-color: #ffffff;
-  overflow: visible;
 }
 
 .footer{
