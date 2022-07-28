@@ -1,0 +1,10 @@
+.profile__button{
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid #ffffff;
+  background-image: url(../../../images/pensil.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #000000;
+}
