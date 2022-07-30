@@ -5,3 +5,14 @@
   font-size: 18px;
   line-height: 122%;
 }
+
+
+@media screen and (min-width: 320px) and (max-width: 900px){
+  .profile__about{
+      width: 100%;
+      font-size: 14px;
+      line-height: 17px;
+      text-align: right;
+  }
+}
+

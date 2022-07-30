@@ -3,8 +3,20 @@
   height: 19px;
   padding: 0;
   border: none;
+  cursor: pointer;
+  overflow: visible;
   background-image: url(../../../images/heart.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-color: #ffffff;
+  transition: 1s;
 }
+
+.element__button-like:hover{
+  opacity: .5;
+}
+
+.element__button-like_active{
+  background-image: url(../../../images/heart_active.svg);
+}
+
