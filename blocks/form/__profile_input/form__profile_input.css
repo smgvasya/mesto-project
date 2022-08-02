@@ -1,0 +1,21 @@
+.form__profile_input{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+    text-align: left;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    padding: 0 0 13px;
+    margin-bottom: 29px;
+  }
+  
+  .form__profile_input:focus {
+    outline: none;
+   }
+  
+  
+   :focus::placeholder {
+    color: transparent
+  }
