@@ -6,24 +6,32 @@ const profileName = container.querySelector('.profile__name');
 const profileAbout = container.querySelector('.profile__about');
 const nameInput = document.querySelector('#edit-profile-name');
 const aboutInput = document.querySelector('#edit-profile-about');
-const closeButtonProfile = document.querySelector('.popup__button-close');
+const closeButtonpopup = document.querySelector('.popup__button-close');
 const popupProfile = container.querySelector('#popup-profile');
-const popupMesto = container.querySelector('#popup-profile');
-const popupProfileSubmit = container.querySelector('form__profile-submit');
-
-
+const popupMesto = container.querySelector('#popup-mesto');
+const popupPhoto = container.querySelector('#popup-photo');
+const popupProfileSubmit = container.querySelector('#popup-submit-profile');
+const popupMestoSubmit = container.querySelector('#popup-submitmesto');
+const popup = container.querySelector('.popup');
 
 function popupOpened()  {
-    popupProfile.classList.add('popup_opened')
+    popup.classList.add('popup_opened')
 };
-
-addButtonProfile.addEventListener('click', popupOpened);
-
 
 function popupClose()  {
-    popupProfile.classList.remove('popup_opened');
+    popup.classList.remove('popup_opened');
 };
-closeButtonProfile.addEventListener('click', popupClose);
+
+
+
+function formSubmitHandler (evt) {
+    evt.preventDefault();
+    profileName.textContent = nameInput.value;
+    profileAbout.textContent = textContent.value;
+    popupClose(popupProfile);
+};
+
+popupProfileSubmit.addEventListener('submit', formSubmitHandler);
 
 
 addButtonProfile.addEventListener('click', function(){
@@ -32,21 +40,39 @@ addButtonProfile.addEventListener('click', function(){
     aboutInput.value = profileAbout.textContent;
 });
 
-function formSubmitHandler (evt) {evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileAbout.textContent = aboutInput.value;
-    popupClose(popupProfile);
-};
-
-popupProfileSubmit.addEventListener('submit', formSubmitHandler);
+closeButtonpopup.addEventListener('click', function(){
+popupClose(popupProfile);
+});
 
 
 
 
 
 
-    nameInput.value = '';
-    aboutInput.value = '';
+addButtonPhoto.addEventListener('click', function(){
+    popupOpened(popupMesto);
+});
+
+closeButtonpopup.addEventListener('click', function(){
+popupClose(popupMesto);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
