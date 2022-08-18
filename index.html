@@ -28,7 +28,8 @@
             <section class="elements">
                 <ul class="elements__container">
                     <li class="element">
-                        <img src="./images/karachaevsk.jpg" class="element__photo" alt="фото" />
+                        <button class="element__button-trash" type="button"></button> 
+                        <img src="./images/karachaevsk.jpg" class="element__photo" alt="фото"/>
                         <div class="element__about">
                             <h2 class="element__title">Карачаевск</h2>
                             <button class="element__button-like" type="button"></button>
@@ -36,6 +37,7 @@
                     </li>
 
                     <li class="element">
+                        <button class="element__button-trash" type="button"></button>
                         <img src="./images/elbrus.jpg" class="element__photo" alt="фото" />
                         <div class="element__about">
                             <h2 class="element__title">Гора Эльбрус</h2>
@@ -44,6 +46,7 @@
                     </li>
 
                     <li class="element">
+                        <button class="element__button-trash" type="button"></button>
                         <img src="./images/dombay.jpg" class="element__photo" alt="фото" />
                         <div class="element__about">
                             <h2 class="element__title">Домбай</h2>
@@ -52,6 +55,7 @@
                     </li>
 
                     <li class="element">
+                        <button class="element__button-trash" type="button"></button>
                         <img src="./images/elbrus.jpg" class="element__photo" alt="фото" />
                         <div class="element__about">
                             <h2 class="element__title">Гора Эльбрус</h2>
@@ -60,6 +64,7 @@
                     </li>
 
                     <li class="element">
+                        <button class="element__button-trash" type="button"></button>
                         <img src="./images/dombay.jpg" class="element__photo" alt="фото" />
                         <div class="element__about">
                             <h2 class="element__title">Домбай</h2>
@@ -68,6 +73,7 @@
                     </li>
 
                     <li class="element">
+                        <button class="element__button-trash" type="button"></button>
                         <img src="./images/karachaevsk.jpg" class="element__photo" alt="фото" />
                         <div class="element__about">
                             <h2 class="element__title">Карачаево-Черкесия</h2>
@@ -82,7 +88,7 @@
             <p class="footer__copyright">&copy;&nbsp;2020 Mesto Russia</p>
         </footer>
 
-        <section class="popup popup__profile">
+        <div class="popup" id='popup-profile'>
             <div class="popup__container">
                 <h2 class="popup__heading">Редактировать профиль</h2>
                 <button class="popup__button-close" type="button">
@@ -97,7 +103,34 @@
                     </fieldset>
                 </form>
             </div>
-        </section>
+        </div>
+        
+        <div class="popup" id='popup-mesto'>
+            <div class="popup__container">
+                <h2 class="popup__heading">Новое место</h2>
+                <button class="popup__button-close" type="button">
+                    <img class="popup__button-close-icon" src="./images/close_icon.svg" alt="Закрыть" />
+                </button>
+
+                <form class="form" name="form-edit-profile" id="edit-profile">
+                    <fieldset class="form__profile">
+                        <input class="form__profile-input" type="text" id="edit-profile-name" name="profile-name" placeholder="Название" />
+                        <input class="form__profile-input" type="text" id="edit-profile-about" name="profile-about" placeholder="Ссылка на картинку" />
+                        <input class="form__profile-submit" type="submit" value="Сохранить" />
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+        <div class="popup overlay" id='popup-photo'>
+            <div class="popup__container-photo">
+                <button class="popup__button-close" type="button">
+                    <img class="popup__button-close-icon" src="./images/close_icon.svg" alt="Закрыть" />
+                </button>
+                <img src="./images/karachaevsk.jpg" class="popup__img" alt="фото" />
+                <h2 class="popup__photo-title">Карачаевск</h2>
+            </div>
+        </div>
         <script src="./pages/script.js"></script>
     </body>
 </html>
