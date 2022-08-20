@@ -6,33 +6,23 @@ const profileName = container.querySelector('.profile__name');
 const profileAbout = container.querySelector('.profile__about');
 const nameInput = document.querySelector('#edit-profile-name');
 const aboutInput = document.querySelector('#edit-profile-about');
-const closeButtonpopup = document.querySelector('.popup__button-close');
+const closePopupProfile = document.querySelector('#popup-profile-close');
+const closePopupMesto = document.querySelector('#popup-mesto-close');
 const popupProfile = container.querySelector('#popup-profile');
 const popupMesto = container.querySelector('#popup-mesto');
 const popupPhoto = container.querySelector('#popup-photo');
 const popupProfileSubmit = container.querySelector('#popup-submit-profile');
 const popupMestoSubmit = container.querySelector('#popup-submitmesto');
-const popup = container.querySelector('.popup');
+const popups = container.querySelector('.popup');
+const formProfile = container.querySelector('#form-profile');
 
-function popupOpened()  {
+function popupOpened(popup)  {
     popup.classList.add('popup_opened')
 };
 
-function popupClose()  {
+function popupClose(popup)  {
     popup.classList.remove('popup_opened');
 };
-
-
-
-function formSubmitHandler (evt) {
-    evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileAbout.textContent = textContent.value;
-    popupClose(popupProfile);
-};
-
-popupProfileSubmit.addEventListener('submit', formSubmitHandler);
-
 
 addButtonProfile.addEventListener('click', function(){
     popupOpened(popupProfile);
@@ -40,26 +30,31 @@ addButtonProfile.addEventListener('click', function(){
     aboutInput.value = profileAbout.textContent;
 });
 
-closeButtonpopup.addEventListener('click', function(){
+//не получается изменить инфу в профидле
+// function formSubmitHandler (evt) {
+//     evt.preventDefault();
+//     profileName.textContent = nameInput.value;
+//     profileAbout.textContent = textContent.value;  
+// }
+// formProfile.addEventListener('submit', formSubmitHandler);
+
+
+closePopupProfile.addEventListener('click', function(){
 popupClose(popupProfile);
 });
-
-
-
-
 
 
 addButtonPhoto.addEventListener('click', function(){
     popupOpened(popupMesto);
 });
 
-closeButtonpopup.addEventListener('click', function(){
+closePopupMesto.addEventListener('click', function(){
 popupClose(popupMesto);
 });
 
 
 
-
+// при сохранинии выскакивают все формы
 
 
 
