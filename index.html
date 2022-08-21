@@ -96,8 +96,8 @@
                 </button>
                 <form class="form" name="form-edit-profile" id="form-profile">
                     <fieldset class="form__profile" id='popup-profile'>
-                        <input class="form__profile-input" type="text" id="edit-profile-name" name="profile-name" placeholder="Жак-Ив Кусто" />
-                        <input class="form__profile-input" type="text" id="edit-profile-about" name="profile-about" placeholder="Исследователь океана" />
+                        <input class="form__profile-input" type="text" id="edit-profile-name" name="profile-name" placeholder="Имя" />
+                        <input class="form__profile-input" type="text" id="edit-profile-about" name="profile-about" placeholder="О себе" />
                         <input class="form__profile-submit" id='popup-submit-profile' type="submit" value="Сохранить" />
                     </fieldset>
                 </form>
@@ -110,10 +110,10 @@
                 <button class="popup__button-close" id='popup-mesto-close' type="button">
                     <img class="popup__button-close-icon" src="./images/close_icon.svg" alt="Закрыть" />
                 </button>
-                <form class="form" name="form-edit-profile" id="edit-profile">
+                <form class="form" name="form-edit-profile" id="edit-mesto">
                     <fieldset class="form__profile">
-                        <input class="form__profile-input" type="text" id="edit-profile-name" name="profile-name" placeholder="Название" />
-                        <input class="form__profile-input" type="text" id="edit-profile-about" name="profile-about" placeholder="Ссылка на картинку" />
+                        <input class="form__profile-input" type="text" id="edit-mesto-title" name="profile-name" placeholder="Название" />
+                        <input class="form__profile-input" type="text" id="edit-mesto-link" name="profile-about" placeholder="Ссылка на картинку" />
                         <input class="form__profile-submit" id='popup-submit-mesto' type="submit" value="Сохранить" />
                     </fieldset>
                 </form>
@@ -129,6 +129,18 @@
                 <h2 class="popup__photo-title">Карачаевск</h2>
             </div>
         </div>
+
+        <template id="card-template">
+            <li class="element">
+                <button class="element__button-trash" type="button"></button> 
+                <img src="./images/karachaevsk.jpg" class="element__photo" alt="фото"/>
+                <div class="element__about">
+                    <h2 class="element__title">Карачаевск</h2>
+                    <button class="element__button-like" type="button"></button>
+                </div>
+            </li>
+        </template>
+
         <script src="./pages/script.js"></script>
     </body>
 </html>
