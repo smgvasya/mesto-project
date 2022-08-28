@@ -23,7 +23,6 @@ const mestoName = document.querySelector('#edit-mesto-title');
 const mestoLink = document.querySelector('#edit-mesto-link');
 
 
-
 //Функция открытие модальных окон
 function popupOpened(popup)  {
   popup.classList.add('popup_opened')
