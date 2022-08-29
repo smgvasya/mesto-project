@@ -22,47 +22,45 @@ const contentElements = document.querySelector('.elements');
 const mestoName = document.querySelector('#edit-mesto-title');
 const mestoLink = document.querySelector('#edit-mesto-link');
 
+const closeButtons = document.querySelectorAll('.popup__close');
+
 
 //Функция открытие модальных окон
-function popupOpened(popup)  {
+function openPopup(popup)  { 
   popup.classList.add('popup_opened')
 }
 
 //Функция закрытия модальных окон
-function popupClose(popup)  {
+function closePopup(popup)  {
   popup.classList.remove('popup_opened');
 }
 
 //Функция формы редактирования профиля
-function formSubmitProfile (evt) {
+function submitFormProfile (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileAbout.textContent = aboutInput.value;
-  popupClose(popupProfile); 
+  closePopup(popupProfile); 
 }
-formProfile.addEventListener('submit', formSubmitProfile);
+formProfile.addEventListener('submit', submitFormProfile);
 
 //Открытие окна редактирования профиля
 addButtonProfile.addEventListener('click', function (){
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
-  popupOpened(popupProfile);
+  openPopup(popupProfile);
 });
 
-//Закрытие окна редактирования профиля
-closePopupProfile.addEventListener('click', function (){
-  popupClose(popupProfile);
-  });
+// Закрытие всех модальных окон
+closeButtons.forEach((button) => {
+  const popup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(popup));
+});
 
 //Открытие окна добавление карточки
   addButtonPhoto.addEventListener('click', function (){
-    popupOpened(popupMesto);
+    openPopup(popupMesto);
   });
-
-//Закрытие окна добавление карточки
-  closePopupMesto.addEventListener('click', function (){
-    popupClose(popupMesto);
-  })
 
 // Функция добавления новой карточки
   function addCard(element) {
@@ -77,19 +75,17 @@ closePopupProfile.addEventListener('click', function (){
  
 
   //Удаление карточки
-  const deleteElement = cardElement.querySelectorAll('.element__button-trash');
-  deleteElement.forEach(delCard => {
-    delCard.addEventListener('click', (evt) => {
-      evt.target.closest(".element").remove();
-  });
+  const deleteElement = cardElement.querySelector('.element__button-trash');
+  
+  deleteElement.addEventListener('click', (evt) => {
+      cardElement.remove();
   });
 
    //Лайк карточки
-  const elementLikes = cardElement.querySelectorAll('.element__button-like');
-  elementLikes.forEach(likeBtn => {
-    likeBtn.addEventListener('click', (evt) => {
+  const elementLikes = cardElement.querySelector('.element__button-like');
+
+  elementLikes.addEventListener('click', (evt) => {
      evt.target.classList.toggle('element__button-like_active');
-  });
   });
 
    //Открытие модального окна/фото карточки 
@@ -97,33 +93,21 @@ closePopupProfile.addEventListener('click', function (){
       popupImg.src = element.link;
       popupPhotoTitle.textContent = element.name;
       popupImg.alt = element.name;
-      popupOpened(popupPhoto);
+      openPopup(popupPhoto);
     });
     return cardElement;
   }
-
-
-  //Закрытие попапа с фото
-closePopupPhoto.addEventListener("click", function () {
-  popupClose(popupPhoto);
-});
-
 
   //Функция формы
   function displayCard(element) {
     elementsContainer.prepend(addCard(element));
   } 
-
-
+  
   //Добавление карточек из кода
-  initialCards.forEach ((element) => {
-    displayCard(element);
-  })
-
+  initialCards.forEach(displayCard);
 
 // Функция формы добавления карточки/очистка инпутов
-
-function formSubmitMesto(evt) {
+function SubmitFormMesto(evt) {
   evt.preventDefault ();
 
   const newElement = {
@@ -132,11 +116,11 @@ function formSubmitMesto(evt) {
   }; 
  
   displayCard(newElement);
-  popupClose(popupMesto);
+  closePopup(popupMesto);
 
-  mestoName.value = "";
-  mestoLink.value = "";
+  evt.target.reset()
+ 
 }
-formMesto.addEventListener ('submit', formSubmitMesto);
+formMesto.addEventListener ('submit', SubmitFormMesto);
 
 
