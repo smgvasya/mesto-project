@@ -1,4 +1,4 @@
-const initialCards = [
+  const initialCards = [
   {
     name: 'До встречи!',
     link: 'https://images.unsplash.com/photo-1599833975787-5c143f373c30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1528&q=80'

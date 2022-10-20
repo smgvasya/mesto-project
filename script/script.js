@@ -24,10 +24,10 @@ const mestoLink = document.querySelector('#edit-mesto-link');
 
 const closeButtons = document.querySelectorAll('.popup__close');
 
-
+const popup = document.querySelectorAll('.popup');
 //Функция открытие модальных окон
-function openPopup(popup)  { 
-  popup.classList.add('popup_opened')
+function openPopup(popup)  {
+  popup.classList.add('popup_opened');
 }
 
 //Функция закрытия модальных окон
@@ -35,12 +35,29 @@ function closePopup(popup)  {
   popup.classList.remove('popup_opened');
 }
 
+//Функция закрытия мадальных окон по esc
+function closePopupEsc (evt) {
+  const popup = document.querySelectorAll('.popup');
+  if (evt.key === 'Escape') {
+    popup.forEach((element) => element.classList.remove('popup_opened'))
+  }
+}
+
+//Функция закрытия мадальных окон при клике на оверлей
+function closePopupOverlay (popup) {
+  popup.addEventListener('click', (evt) => {
+    if(evt.target === evt.currentTarget){
+      closePopup(popup);
+    };
+  });
+}
+
 //Функция формы редактирования профиля
 function submitFormProfile (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileAbout.textContent = aboutInput.value;
-  closePopup(popupProfile); 
+  closePopup(popupProfile);
 }
 formProfile.addEventListener('submit', submitFormProfile);
 
@@ -51,10 +68,15 @@ addButtonProfile.addEventListener('click', function (){
   openPopup(popupProfile);
 });
 
-// Закрытие всех модальных окон
+//Закрытие всех модальных окон
+
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
+  closePopupOverlay (popupProfile);
+  closePopupOverlay (popupMesto);
+  closePopupOverlay (popupPhoto);
+  document.addEventListener('keydown', closePopupEsc);
 });
 
 //Открытие окна добавление карточки
@@ -68,15 +90,15 @@ closeButtons.forEach((button) => {
     const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
     const photoElement = cardElement.querySelector('.element__photo');
     const titleElement = cardElement.querySelector('.element__title');
-    
+
     titleElement.textContent = element.name
     photoElement.src = element.link
     photoElement.alt = element.name
- 
+
 
   //Удаление карточки
   const deleteElement = cardElement.querySelector('.element__button-trash');
-  
+
   deleteElement.addEventListener('click', (evt) => {
       cardElement.remove();
   });
@@ -88,7 +110,7 @@ closeButtons.forEach((button) => {
      evt.target.classList.toggle('element__button-like_active');
   });
 
-   //Открытие модального окна/фото карточки 
+   //Открытие модального окна/фото карточки
     photoElement.addEventListener("click", () => {
       popupImg.src = element.link;
       popupPhotoTitle.textContent = element.name;
@@ -101,8 +123,8 @@ closeButtons.forEach((button) => {
   //Функция формы
   function displayCard(element) {
     elementsContainer.prepend(addCard(element));
-  } 
-  
+  }
+
   //Добавление карточек из кода
   initialCards.forEach(displayCard);
 
@@ -111,15 +133,15 @@ function SubmitFormMesto(evt) {
   evt.preventDefault ();
 
   const newElement = {
-    name: mestoName.value, 
+    name: mestoName.value,
     link: mestoLink.value
-  }; 
- 
+  };
+
   displayCard(newElement);
   closePopup(popupMesto);
 
   evt.target.reset()
- 
+
 }
 formMesto.addEventListener ('submit', SubmitFormMesto);
 
