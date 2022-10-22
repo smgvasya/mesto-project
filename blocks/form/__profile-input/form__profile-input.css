@@ -8,14 +8,13 @@
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, .2);
     padding: 0 0 13px;
-    margin-bottom: 29px;
   }
-  
+
   .form__profile-input:focus {
     outline: none;
    }
-  
-  
+
+
    :focus::placeholder {
     color: transparent
   }
