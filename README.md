@@ -9,7 +9,6 @@
 - Flexbox
 - Позиционирование
 - Grid
-- Фреймы
 - Media queries
 - Формы
 - JS
