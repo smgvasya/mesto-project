@@ -43,12 +43,10 @@
                     <img class="popup__button-close-icon" src="./images/close_icon.svg" alt="Закрыть" />
                 </button>
                 <form class="form" name="form-edit-profile" id="form-profile" novalidate>
-                    <fieldset class="form__profile" id='form-popup-profile'>
+                    <fieldset class="form__profile" id="fieldset-profile">
                         <input class="form__profile-input" type="text" id="edit-profile-name" name="profile-name" placeholder="Имя" required minlength="2" mmaxlength="40" pattern="^[A-Za-zА-Яа-яЁё -]+$" data-error-message="Только латинские и/или кириллические буквы, дефис."/>
-                        <!-- спан для ошибки -->
-                        <span class="form__input-error profile-error"></span>
+                        <span class="form__input-error profile-error" id='popup-profile' ></span>
                         <input class="form__profile-input" type="text" id="edit-profile-about" name="profile-about" placeholder="О себе" required minlength="2" mmaxlength="200" pattern="^[A-Za-zА-Яа-яЁё -]+$" data-error-message="Только латинские и/или кириллические буквы, дефис."/>
-                        <!-- спан для ошибки -->
                         <span class="form__input-error profile-error"></span>
                         <button class="form__profile-submit" id='popup-submit-profile' type="submit">Сохранить</button>
                     </fieldset>
@@ -63,13 +61,11 @@
                     <img class="popup__button-close-icon" src="./images/close_icon.svg" alt="Закрыть" />
                 </button>
                 <form class="form" name="form-edit-mesto" id="edit-mesto" novalidate>
-                    <fieldset class="form__profile">
+                    <fieldset class="form__profile" id="fieldset-mesto">
                         <input class="form__profile-input" type="text" id="edit-mesto-title" name="mesto-name" placeholder="Название" required minlength="2" mmaxlength="30" pattern="^[A-Za-zА-Яа-яЁё -]+$" data-error-message="Только латинские и/или кириллические буквы, дефис."/>
-                        <!-- спан для ошибки -->
-                        <span class="form__input-error"></span>
+                        <span class="form__input-error">Вы пропустили это поле.</span>
                         <input class="form__profile-input" type="url" id="edit-mesto-link" name="mesto-link" placeholder="Ссылка на картинку"required/>
-                        <!-- спан для ошибки -->
-                        <span class="form__input-error"></span>
+                        <span class="form__input-error">Введите адрес сайта.</span>
                         <button class="form__profile-submit" id='popup-submit-mesto' type="submit">Сохранить</button>
                     </fieldset>
                 </form>
