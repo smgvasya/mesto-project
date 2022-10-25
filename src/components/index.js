@@ -105,8 +105,6 @@ addButtonProfile.addEventListener('click', function (){
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
   openPopup(popupProfile);
-  checkInputValidity (formElement, nameInput, elements);
-  checkInputValidity (formElement, aboutInput, elements);
 });
 
 //Закрытие всех модальных окон
