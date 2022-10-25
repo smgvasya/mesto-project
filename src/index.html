@@ -5,14 +5,14 @@
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1" />
         <meta name="description" content="Социальная сеть Место Russia" />
         <meta name="author" content="Егорова Ксения" />
-        <link rel="stylesheet" href="./pages/index.css" />
+        <!-- <link rel="stylesheet" href="./pages/index.css" /> -->
         <title>Проект Место</title>
-        <link rel="icon" href="./images/spok-mesto.png" type="image/x-icon">
+        <link rel="icon" href="<%=require('./images/spok-mesto.png')%>" type="image/x-icon">
     </head>
 
     <body class="page">
         <header class="header">
-            <img class="header__logo" src="./images/__logo/logo-mesto.svg" alt="логотип" />
+            <img class="header__logo" src="<%=require('./images/__logo/logo-mesto.svg')%>" alt="логотип" />
         </header>
 
         <main>
@@ -40,14 +40,17 @@
             <div class="popup__container">
                 <h2 class="popup__heading">Редактировать профиль</h2>
                 <button class="popup__button-close popup__close" id='popup-profile-close' type="button">
-                    <img class="popup__button-close-icon" src="./images/close_icon.svg" alt="Закрыть" />
+                    <img class="popup__button-close-icon" src= "<%=require('./images/close_icon.svg')%>" alt="Закрыть" />
                 </button>
                 <form class="form" name="form-edit-profile" id="form-profile" novalidate>
                     <fieldset class="form__profile" id="fieldset-profile">
+
                         <input class="form__profile-input" type="text" id="edit-profile-name" name="profile-name" placeholder="Имя" required minlength="2" mmaxlength="40" pattern="^[A-Za-zА-Яа-яЁё -]+$" data-error-message="Только латинские и/или кириллические буквы, дефис."/>
                         <span class="form__input-error profile-error" id='popup-profile' ></span>
+
                         <input class="form__profile-input" type="text" id="edit-profile-about" name="profile-about" placeholder="О себе" required minlength="2" mmaxlength="200" pattern="^[A-Za-zА-Яа-яЁё -]+$" data-error-message="Только латинские и/или кириллические буквы, дефис."/>
                         <span class="form__input-error profile-error"></span>
+
                         <button class="form__profile-submit" id='popup-submit-profile' type="submit">Сохранить</button>
                     </fieldset>
                 </form>
@@ -58,7 +61,7 @@
             <div class="popup__container">
                 <h2 class="popup__heading">Новое место</h2>
                 <button class="popup__button-close popup__close" id='popup-mesto-close' type="button">
-                    <img class="popup__button-close-icon" src="./images/close_icon.svg" alt="Закрыть" />
+                    <img class="popup__button-close-icon" src= "<%=require('./images/close_icon.svg')%>" alt="Закрыть" />
                 </button>
                 <form class="form" name="form-edit-mesto" id="edit-mesto" novalidate>
                     <fieldset class="form__profile" id="fieldset-mesto">
@@ -75,7 +78,7 @@
         <div class="popup overlay" id='popup-photo'>
             <div class="popup__container-photo">
                 <button class="popup__button-close popup__close" id="popup-photo-close" type="button">
-                    <img class="popup__button-close-icon" src="./images/close_icon.svg" alt="Закрыть" />
+                    <img class="popup__button-close-icon" src= "<%=require('./images/close_icon.svg')%>" alt="Закрыть" />
                 </button>
                 <img src="#" class="popup__img" alt="none" />
                 <h2 class="popup__photo-title">Карачаевск</h2>
@@ -93,8 +96,8 @@
             </li>
         </template>
 
-        <script src="./components/index.js"></script>
-        <!-- <script src="./components/modal.js"></script>
+        <!-- <script src="./components/index.js"></script>
+        <script src="./components/modal.js"></script>
         <script src="./components/utils.js"></script>
         <script src="./components/card.js"></script>
         <script src="./components/validate.js"></script> -->
