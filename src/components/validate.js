@@ -3,11 +3,10 @@
 const selectors = ({
   formSelector: ".form", //класс у всех форм
   inputSelector: ".form__profile-input", //класс у всех инпутов
-  buttonSelector: ".form__profile-submit", //класс кнопка активная
-  buttonDisabledSelector: "form__disable-submit", //класс кнопок выкл
-  errorSelector: "form__profile-error", // класс крассный боттом при ошибке
-  errorActiveSelector: "form__input-error_active", // класс делает видимым текст с ошибкой
-  fieldsetSelector: ".form__profile" // класс филдсетов всех
+  buttonSelector: ".form__profile-submit", // кнопка активная
+  buttonDisabledSelector: "form__disable-submit", // кнопока выкл
+  errorSelector: "form__profile-error", //  красный боттом при ошибке
+  errorActiveSelector: "form__input-error_active", // делает видимым текст с ошибкой
 });
 
 
@@ -79,4 +78,5 @@ const enableValidation = (selectors) => {
     });
   };
 
-  export {enableValidation, selectors};
+
+  export { enableValidation, selectors };

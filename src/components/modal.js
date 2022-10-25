@@ -1,30 +1,3 @@
-import {addButtonProfile,
-  addButtonPhoto,
-  popupProfile,
-  closePopupProfile,
-  profileName,
-  profileAbout,
-  nameInput,
-  aboutInput,
-  formProfile,
-  formMesto,
-  popupMesto,
-  closePopupMesto,
-  popupPhoto,
-  closePopupPhoto,
-  popupImg,
-  popupPhotoTitle,
-  elementsContainer,
-  contentElements,
-  mestoName,
-  mestoLink,
-  closeButtons
-} from "./index";
-
-import {enableValidation, selectors} from "./validate";
-import {submitFormProfile} from "./utils";
-import {initialCards, addCard, displayCard, SubmitFormMesto} from "./cards";
-
 //Функция открытие модальных окон
 function openPopup(popup)  {
   popup.classList.add('popup_opened');
@@ -54,5 +27,5 @@ function closePopupOverlay (popup) {
   });
 }
 
-export {openPopup, closePopup, closePopupEsc, closePopupOverlay};
+//  export { openPopup, closePopup, closePopupEsc, closePopupOverlay };
 
