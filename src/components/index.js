@@ -1,4 +1,4 @@
-import "../index.css";
+// import "../index.css";
 import {enableValidation, selectors} from "./validate";
 import {openPopup, closePopup, closePopupEsc, closePopupOverlay} from "./modal";
 import {submitFormProfile} from "./utils";
