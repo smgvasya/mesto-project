@@ -1,5 +1,4 @@
 //Валидация
-
 const selectors = ({
   formSelector: ".form", //класс у всех форм
   inputSelector: ".form__input", //класс у всех инпутов
@@ -80,6 +79,5 @@ const enableValidation = (selectors) => {
     setEventListeners(formElement, selectors);
     });
   };
-
 
   export { enableValidation, selectors };

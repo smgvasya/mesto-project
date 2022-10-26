@@ -29,7 +29,6 @@ export const contentElements = document.querySelector('.elements');
 export const mestoName = document.querySelector('#mesto-title');
 export const mestoLink = document.querySelector('#mesto-link');
 
-
 export const closeButtons = document.querySelectorAll('.popup__close');
 
 const initialCards = [
@@ -60,7 +59,6 @@ const initialCards = [
 ];
 
 initialCards.reverse();
-
 
 //Функция открытие модальных окон
 function openPopup(popup)  {
@@ -182,6 +180,3 @@ function SubmitFormMesto(evt) {
 formMesto.addEventListener ('submit', SubmitFormMesto);
 
 enableValidation(selectors);
-
-
-
