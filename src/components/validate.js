@@ -2,9 +2,9 @@
 
 const selectors = ({
   formSelector: ".form", //класс у всех форм
-  inputSelector: ".form__profile-input", //класс у всех инпутов
-  buttonSelector: ".form__profile-submit", // кнопка активная
-  buttonDisabledSelector: "form__disable-submit", // кнопока выкл
+  inputSelector: ".form__input", //класс у всех инпутов
+  buttonSelector: ".form__submit", // кнопка активная
+  buttonDisabledSelector: "form__disable-submit", // кнопка выкл
   errorSelector: "form__profile-error", //  красный боттом при ошибке
   errorActiveSelector: "form__input-error_active", // делает видимым текст с ошибкой
 });

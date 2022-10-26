@@ -12,8 +12,8 @@ export const closePopupProfile = document.querySelector('#popup-profile-close');
 
 export const profileName = document.querySelector('.profile__name');
 export const profileAbout = document.querySelector('.profile__about');
-export const nameInput = document.querySelector('#edit-profile-name');
-export const aboutInput = document.querySelector('#edit-profile-about');
+export const nameInput = document.querySelector('#input-name');
+export const aboutInput = document.querySelector('#input-about');
 export const formProfile = document.querySelector('#form-profile');
 export const formMesto = document.querySelector("#edit-mesto");
 export const popupMesto = document.querySelector('#popup-mesto');
@@ -26,8 +26,9 @@ export const popupPhotoTitle = document.querySelector('.popup__photo-title');
 export const elementsContainer = document.querySelector('.elements__container');
 export const contentElements = document.querySelector('.elements');
 
-export const mestoName = document.querySelector('#edit-mesto-title');
-export const mestoLink = document.querySelector('#edit-mesto-link');
+export const mestoName = document.querySelector('#mesto-title');
+export const mestoLink = document.querySelector('#mesto-link');
+
 
 export const closeButtons = document.querySelectorAll('.popup__close');
 
@@ -59,7 +60,6 @@ const initialCards = [
 ];
 
 initialCards.reverse();
-
 
 
 //Функция открытие модальных окон

@@ -1,4 +1,4 @@
-.form__profile-input{
+.form__input{
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
@@ -10,7 +10,7 @@
     padding: 0 0 13px;
   }
 
-  .form__profile-input:focus {
+  .form__input:focus {
     outline: none;
    }
 
