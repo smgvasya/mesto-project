@@ -26,16 +26,32 @@ const hideInputError = (formElement, inputElement, selectors) => {
 
 
 const checkInputValidity = (formElement, inputElement, selectors) => {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage, selectors);
-  } else {
-    hideInputError(formElement, inputElement, selectors);
-  }
   if (inputElement.validity.patternMismatch) {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage);
 }   else {
     inputElement.setCustomValidity("");
 }
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage, selectors);
+  } else {
+    hideInputError(formElement, inputElement, selectors);
+  }
+
+};
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+
+const toggleButtonState = (inputList, buttonElement, selectors) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add(selectors.buttonDisabledSelector);
+  }
+  else {
+    buttonElement.classList.remove(selectors.buttonDisabledSelector);
+  };
 };
 
 const setEventListeners = (formElement, selectors) => {
@@ -53,26 +69,13 @@ const setEventListeners = (formElement, selectors) => {
 };
 
 
-const hasInvalidInput = (inputList) => {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
-};
-
-const toggleButtonState = (inputList, buttonElement, selectors) => {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(selectors.buttonDisabledSelector);
-  }
-  else {
-    buttonElement.classList.remove(selectors.buttonDisabledSelector);
-  };
-};
 
 const enableValidation = (selectors) => {
   const formList = Array.from(document.querySelectorAll(selectors.formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
+      setEventListeners(formElement, selectors);
     });
     setEventListeners(formElement, selectors);
     });
