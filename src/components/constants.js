@@ -53,7 +53,6 @@ const mestoLink = document.querySelector('#mesto-link');
 const closeButtons = document.querySelectorAll('.popup__close');
 const cardTemplate = document.querySelector('#card-template').content;
 
-
 export {
   initialCards,
   addButtonProfile,

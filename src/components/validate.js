@@ -1,5 +1,6 @@
 //Валидация
 const selectors = ({
+  popupSelector: ".popup_opened", //класс у всех открытых попапов
   formSelector: ".form", //класс у всех форм
   inputSelector: ".form__input", //класс у всех инпутов
   buttonSelector: ".form__submit", // кнопка активная
@@ -7,7 +8,6 @@ const selectors = ({
   errorSelector: "form__profile-error", //  красный боттом при ошибке
   errorActiveSelector: "form__input-error_active", // делает видимым текст с ошибкой
 });
-
 
 const showInputError = (formElement, inputElement, errorMessage, selectors) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -23,7 +23,6 @@ const hideInputError = (formElement, inputElement, selectors) => {
   errorElement.textContent = '';
 };
 
-
 const checkInputValidity = (formElement, inputElement, selectors) => {
   if (inputElement.validity.patternMismatch) {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage);
@@ -35,7 +34,6 @@ const checkInputValidity = (formElement, inputElement, selectors) => {
   } else {
     hideInputError(formElement, inputElement, selectors);
   }
-
 };
 
 const hasInvalidInput = (inputList) => {
@@ -57,10 +55,8 @@ const toggleButtonState = (inputList, buttonElement, selectors) => {
 
 const setEventListeners = (formElement, selectors) => {
   const inputList = Array.from(formElement.querySelectorAll(selectors.inputSelector));
-
   const buttonElement = formElement.querySelector(selectors.buttonSelector);
 
-  toggleButtonState (inputList, buttonElement, selectors);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
       checkInputValidity(formElement, inputElement, selectors);
@@ -69,25 +65,29 @@ const setEventListeners = (formElement, selectors) => {
   });
 };
 
+function preparePopup(selectors) {
+  const popup = document.querySelector(selectors.popupSelector);
+  const formElement = popup.querySelector(selectors.formSelector);
+  const inputList = Array.from(
+    formElement.querySelectorAll(selectors.inputSelector)
+  );
+  const buttonElement = formElement.querySelector(selectors.buttonSelector);
+  toggleButtonState(inputList, buttonElement, selectors);
+  inputList.forEach((inputElement) => {
+    if (inputElement.value !== "") {
+      checkInputValidity(formElement, inputElement, selectors);
+    }
+  });
+}
 
 const enableValidation = (selectors) => {
   const formList = Array.from(document.querySelectorAll(selectors.formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
-      setEventListeners(formElement, selectors);
     });
     setEventListeners(formElement, selectors);
     });
   };
 
-  // setEventListeners(formElement, selectors); - комментарий ревью
-  // При сабмите устанавливать обработчики валидации не нужно, в таком виде, при каждом сабмите установится новый обработчик
-  // addEventListener навешивает на элемент обработчик и,  если его потом не удалить, он останется на элементе навсегда.
-  // Если Вы еще раз навешиваете обработчик, то на элементе будет уже 2 обработчика срабатывать друг за другом. И так далее.
-  // На 10й раз Ваше приложение начнет глючить и пойдут ошибки в консоли, так как обработчики делают одно и тоже, а данных уже может и не быть давно.
-  // Это называется утечка памяти. Поэтому либо нужно удалять обработчик правильно, либо навешивать его только 1 раз, а не при каждом открытии, закрытии или еще какой-нибудь операции.
-  // Для деактивации кнопки и сброса ошибок лучше сделать отдельную функцию
-
-
-  export { enableValidation, selectors };
+  export { enableValidation, selectors, preparePopup };

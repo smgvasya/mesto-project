@@ -13,7 +13,7 @@ import {
   closeButtons
   } from "./constants.js";
 
-import { enableValidation, selectors } from "./validate.js";
+import { enableValidation, selectors, preparePopup } from "./validate.js";
 import { openPopup, closePopup, closePopupOverlay } from "./modal.js";
 import { submitFormMesto, displayCard } from "./utils.js";
 
@@ -25,6 +25,7 @@ addButtonProfile.addEventListener('click', function (){
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
   openPopup(popupProfile);
+  preparePopup(selectors);
 });
 
 //Закрытие всех модальных окон
@@ -38,6 +39,7 @@ closeButtons.forEach((button) => {
 //Открытие окна добавление карточки
 addButtonPhoto.addEventListener('click', function (){
   openPopup(popupMesto);
+  preparePopup(selectors);
 });
 
 
