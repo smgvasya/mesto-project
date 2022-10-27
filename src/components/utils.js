@@ -31,7 +31,7 @@ function displayCard(element) {
 
 
 // Функция формы добавления карточки/очистка инпутов
-function SubmitFormMesto(evt) {
+function submitFormMesto(evt) {
   evt.preventDefault ();
 
   const newElement = {
@@ -46,5 +46,5 @@ function SubmitFormMesto(evt) {
 
 }
 
-export { SubmitFormMesto, submitFormProfile, displayCard };
+export { submitFormMesto, submitFormProfile, displayCard };
 

@@ -15,7 +15,7 @@ import {
 
 import { enableValidation, selectors } from "./validate.js";
 import { openPopup, closePopup, closePopupOverlay } from "./modal.js";
-import { SubmitFormMesto, displayCard } from "./utils.js";
+import { submitFormMesto, displayCard } from "./utils.js";
 
 
 initialCards.reverse();
@@ -44,7 +44,7 @@ addButtonPhoto.addEventListener('click', function (){
 //Добавление карточек из кода
 initialCards.forEach(displayCard);
 
-formMesto.addEventListener ('submit', SubmitFormMesto);
+formMesto.addEventListener ('submit', submitFormMesto);
 
 enableValidation(selectors);
 

@@ -12,11 +12,12 @@ function closePopup(popup)  {
 
 //Функция закрытия мадальных окон по esc
 function closePopupEsc (evt) {
-  const popup = document.querySelectorAll('.popup');
   if (evt.key === 'Escape') {
-    popup.forEach((element) => element.classList.remove('popup_opened'))
+    const popup = document.querySelectorAll('.popup');
+    popup.forEach((popup) =>  closePopup(popup))
   }
-}
+};
+
 
 //Функция закрытия мадальных окон при клике на оверлей
 function closePopupOverlay (popup) {

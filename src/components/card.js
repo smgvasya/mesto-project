@@ -1,13 +1,14 @@
 import {
   popupPhoto,
   popupImg,
-  popupPhotoTitle } from "./constants.js";
+  popupPhotoTitle,
+  cardTemplate } from "./constants.js";
 
   import { openPopup } from "./modal.js";
 
+
 // Функция добавления новой карточки
 function addCard(element) {
-  const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
   const photoElement = cardElement.querySelector('.element__photo');
   const titleElement = cardElement.querySelector('.element__title');

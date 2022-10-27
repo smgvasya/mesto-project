@@ -46,9 +46,11 @@ const hasInvalidInput = (inputList) => {
 
 const toggleButtonState = (inputList, buttonElement, selectors) => {
   if (hasInvalidInput(inputList)) {
+    buttonElement.disabled = true;
     buttonElement.classList.add(selectors.buttonDisabledSelector);
   }
   else {
+    buttonElement.disabled = false;
     buttonElement.classList.remove(selectors.buttonDisabledSelector);
   };
 };
@@ -68,7 +70,6 @@ const setEventListeners = (formElement, selectors) => {
 };
 
 
-
 const enableValidation = (selectors) => {
   const formList = Array.from(document.querySelectorAll(selectors.formSelector));
   formList.forEach((formElement) => {
@@ -79,5 +80,14 @@ const enableValidation = (selectors) => {
     setEventListeners(formElement, selectors);
     });
   };
+
+  // setEventListeners(formElement, selectors); - комментарий ревью
+  // При сабмите устанавливать обработчики валидации не нужно, в таком виде, при каждом сабмите установится новый обработчик
+  // addEventListener навешивает на элемент обработчик и,  если его потом не удалить, он останется на элементе навсегда.
+  // Если Вы еще раз навешиваете обработчик, то на элементе будет уже 2 обработчика срабатывать друг за другом. И так далее.
+  // На 10й раз Ваше приложение начнет глючить и пойдут ошибки в консоли, так как обработчики делают одно и тоже, а данных уже может и не быть давно.
+  // Это называется утечка памяти. Поэтому либо нужно удалять обработчик правильно, либо навешивать его только 1 раз, а не при каждом открытии, закрытии или еще какой-нибудь операции.
+  // Для деактивации кнопки и сброса ошибок лучше сделать отдельную функцию
+
 
   export { enableValidation, selectors };
