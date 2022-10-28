@@ -82,4 +82,4 @@ const enableValidation = (selectors) => {
     });
   };
 
-  export { enableValidation, selectors, preparePopup };
+  export { enableValidation, preparePopup };

@@ -10,10 +10,11 @@ import {
   aboutInput,
   popupMesto,
   formMesto,
-  closeButtons
+  closeButtons,
+  selectors
   } from "./constants.js";
 
-import { enableValidation, selectors, preparePopup } from "./validate.js";
+import { enableValidation, preparePopup } from "./validate.js";
 import { openPopup, closePopup, closePopupOverlay } from "./modal.js";
 import { submitFormMesto, displayCard } from "./utils.js";
 
