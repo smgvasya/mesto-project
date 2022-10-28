@@ -1,4 +1,4 @@
-import { selectors } from "./validate"
+import { selectors } from "./constants"
 
 //Функция открытие модальных окон
 function openPopup(popup)  {
