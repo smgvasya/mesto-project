@@ -53,6 +53,16 @@ const mestoLink = document.querySelector('#mesto-link');
 const closeButtons = document.querySelectorAll('.popup__close');
 const cardTemplate = document.querySelector('#card-template').content;
 
+const selectors = ({
+  popupSelector: ".popup_opened", //класс у всех открытых попапов
+  formSelector: ".form", //класс у всех форм
+  inputSelector: ".form__input", //класс у всех инпутов
+  buttonSelector: ".form__submit", // кнопка активная
+  buttonDisabledSelector: "form__disable-submit", // кнопка выкл
+  errorSelector: "form__profile-error", //  красный боттом при ошибке
+  errorActiveSelector: "form__input-error_active", // делает видимым текст с ошибкой
+});
+
 export {
   initialCards,
   addButtonProfile,
@@ -76,5 +86,6 @@ export {
   mestoName,
   mestoLink,
   closeButtons,
-  cardTemplate
+  cardTemplate,
+  selectors
 };
