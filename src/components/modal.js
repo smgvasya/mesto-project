@@ -13,15 +13,15 @@ function closePopup(popup)  {
 //Функция закрытия мадальных окон по esc
 function closePopupEsc (evt) {
   if (evt.key === 'Escape') {
-    const popup = document.querySelectorAll('.popup');
-    popup.forEach((popup) => closePopup(popup))
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
   }
 };
 
 
 //Функция закрытия мадальных окон при клике на оверлей
 function closePopupOverlay (popup) {
-  popup.addEventListener('click', (evt) => {
+  popup.addEventListener('mousedown', (evt) => {
     if(evt.target === evt.currentTarget){
       closePopup(popup);
     };
