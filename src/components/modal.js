@@ -1,3 +1,5 @@
+import { selectors } from "./validate"
+
 //Функция открытие модальных окон
 function openPopup(popup)  {
   popup.classList.add('popup_opened');
@@ -13,11 +15,10 @@ function closePopup(popup)  {
 //Функция закрытия мадальных окон по esc
 function closePopupEsc (evt) {
   if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
+    const popup = document.querySelector(selectors.popupSelector);
+    closePopup(popup);
   }
 };
-
 
 //Функция закрытия мадальных окон при клике на оверлей
 function closePopupOverlay (popup) {
