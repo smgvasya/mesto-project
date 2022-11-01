@@ -11,12 +11,16 @@ import {
   popupMesto,
   formMesto,
   closeButtons,
-  selectors
+  selectors,
+  avatarLink,
+  formAvatar,
+  addButtonAvatar,
+  popupAvatar
   } from "./constants.js";
 
 import { enableValidation, preparePopup } from "./validate.js";
 import { openPopup, closePopup, closePopupOverlay } from "./modal.js";
-import { submitFormMesto, displayCard } from "./utils.js";
+import { submitFormMesto, displayCard, submitFormAvatar } from "./utils.js";
 
 
 initialCards.reverse();
@@ -43,11 +47,20 @@ addButtonPhoto.addEventListener('click', function (){
   preparePopup(selectors);
 });
 
+//Открытие окна обновления аватара
+addButtonAvatar.addEventListener('click', function (){
+  openPopup(popupAvatar);
+  preparePopup(selectors);
+});
+
 
 //Добавление карточек из кода
 initialCards.forEach(displayCard);
 
+
+formAvatar.addEventListener('submit', submitFormAvatar);
 formMesto.addEventListener ('submit', submitFormMesto);
+
 
 enableValidation(selectors);
 

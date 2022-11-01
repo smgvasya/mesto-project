@@ -50,6 +50,14 @@ const contentElements = document.querySelector('.elements');
 const mestoName = document.querySelector('#mesto-title');
 const mestoLink = document.querySelector('#mesto-link');
 
+
+const avatarLink = document.querySelector('.profile__avatar');
+const avatarInput = document.querySelector('#avatar-link');
+const formAvatar= document.querySelector("#form-avatar");
+const addButtonAvatar = document.querySelector('.profile__button-avatar');
+const popupAvatar = document.querySelector('#popup-avatar');
+
+
 const closeButtons = document.querySelectorAll('.popup__close');
 const cardTemplate = document.querySelector('#card-template').content;
 
@@ -85,7 +93,12 @@ export {
   contentElements,
   mestoName,
   mestoLink,
+  avatarLink,
+  avatarInput,
+  formAvatar,
+  addButtonAvatar,
   closeButtons,
   cardTemplate,
+  popupAvatar,
   selectors
 };

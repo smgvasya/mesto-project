@@ -8,7 +8,10 @@ import {
   popupMesto,
   elementsContainer,
   mestoName,
-  mestoLink } from "./constants.js";
+  mestoLink,
+  avatarLink,
+  avatarInput,
+  popupAvatar } from "./constants.js";
 
 import { addCard } from "./card";
 import { closePopup } from "./modal";
@@ -29,6 +32,13 @@ function displayCard(element) {
   elementsContainer.prepend(addCard(element));
 }
 
+//Функция формы редактирования аватара
+function submitFormAvatar(evt){
+  evt.preventDefault ();
+  avatarLink.src = avatarInput.value;
+  closePopup(popupAvatar);
+  evt.target.reset()
+}
 
 // Функция формы добавления карточки/очистка инпутов
 function submitFormMesto(evt) {
@@ -43,8 +53,14 @@ function submitFormMesto(evt) {
   closePopup(popupMesto);
 
   evt.target.reset()
-
 }
 
-export { submitFormMesto, submitFormProfile, displayCard };
+// function displaySaving(true/false, evt.target.submit) {
+//   if (true) {
+//     evt.target.submit.textContent = "Сохранение...";
+//   } else {
+//     evt.target.submit.textContent = "Сохранить";
+//   }
+
+export { submitFormMesto, submitFormProfile, displayCard, submitFormAvatar };
 
