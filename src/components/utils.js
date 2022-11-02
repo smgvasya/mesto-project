@@ -55,12 +55,15 @@ function submitFormMesto(evt) {
   evt.target.reset()
 }
 
-// function displaySaving(true/false, evt.target.submit) {
-//   if (true) {
-//     evt.target.submit.textContent = "Сохранение...";
-//   } else {
-//     evt.target.submit.textContent = "Сохранить";
-//   }
+// Улучшенный UX всех форм
+function renderLoading(isLoading) {
+  const submitText = document.querySelector('.form__input')
+  if (isLoading) {
+    submitText.textContent = "Сохранение...";
+  } else {
+    submitText.textContent = "Сохранить";
+  }
+}
 
-export { submitFormMesto, submitFormProfile, displayCard, submitFormAvatar };
+export { submitFormMesto, submitFormProfile, displayCard, submitFormAvatar, renderLoading };
 

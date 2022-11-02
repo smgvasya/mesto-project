@@ -8,6 +8,9 @@ import {
 
 
 // Функция добавления новой карточки
+//function addCard({name, link, likes, owner, _id}, userId)
+// const userId = userId - проверка id и далее используем при проверке лайков, иконки дел.
+
 function addCard(element) {
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
   const photoElement = cardElement.querySelector('.element__photo');
