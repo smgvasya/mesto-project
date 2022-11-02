@@ -13,13 +13,6 @@ export function testRes(res) {
   return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-export const getInitialCards = () => {
-  return fetch(`${config.baseUrl}/cards`, {
-    headers: config.headers
-  })
-  .then(testRes);
-}
-
 export const getProfile = () => {
   return fetch(`${config.baseUrl}/users/me`, {
     // method: "GET",
@@ -52,20 +45,27 @@ export const postProfile = (name, link) => {
   .then(testRes);
 };
 
-export const deleteCard = (cardId) => {
-  return fetch(`${config.baseUrl}/cards/${cardId}`,{
-      method: "DELETE",
-      headers: config.headers,
+export const getInitialCards = () => {
+  return fetch(`${config.baseUrl}/cards`, {
+    headers: config.headers
   })
   .then(testRes);
 }
 
-export const patchAvatar = (link) => {
+export const deleteCard = (cardId) => {
+  return fetch(`${config.baseUrl}/cards/${cardId}`,{
+    method: "DELETE",
+    headers: config.headers,
+  })
+  .then(testRes);
+}
+
+export const patchAvatar = (avatar) => {
   return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: "PATCH",
     headers: config.headers,
     body: JSON.stringify({
-      avatar: link,
+      avatar: avatar,
     }),
   })
   .then(testRes);
@@ -73,16 +73,16 @@ export const patchAvatar = (link) => {
 
 export const putLike = (cardId) => {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`,{
-      method: "PUT",
-      headers: config.headers,
+    method: "PUT",
+    headers: config.headers,
   })
   .then(testRes);
 }
 
 export const deleteLike = (cardId) => {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`,{
-      method: "DELETE",
-      headers: config.headers,
+    method: "DELETE",
+    headers: config.headers,
   })
   .then(testRes);
 }

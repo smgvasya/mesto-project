@@ -11,10 +11,13 @@ import {
   mestoLink,
   avatarLink,
   avatarInput,
-  popupAvatar } from "./constants.js";
+  popupAvatar } from "./constants";
 
 import { addCard } from "./card";
 import { closePopup } from "./modal";
+
+import { testRes, getProfile, patchProfile, postProfile, getInitialCards,
+  deleteCard, patchAvatar, putLike, deleteLike } from "./api";
 
 
 //Функция формы редактирования профиля
@@ -32,14 +35,6 @@ function displayCard(element) {
   elementsContainer.prepend(addCard(element));
 }
 
-//Функция формы редактирования аватара
-function submitFormAvatar(evt){
-  evt.preventDefault ();
-  avatarLink.src = avatarInput.value;
-  closePopup(popupAvatar);
-  evt.target.reset()
-}
-
 // Функция формы добавления карточки/очистка инпутов
 function submitFormMesto(evt) {
   evt.preventDefault ();
@@ -54,6 +49,26 @@ function submitFormMesto(evt) {
 
   evt.target.reset()
 }
+
+//Функция формы редактирования аватара
+function submitFormAvatar(evt) {
+  evt.preventDefault ();
+  renderLoading(true)
+
+  patchAvatar(avatarInput.value)
+  .then((res) =>{
+    avatarLink.src = res.avatar;
+    closePopup(popupAvatar);
+    evt.target.reset();
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+  .finally(() => {
+   renderLoading (false)
+  });
+}
+
 
 // Улучшенный UX всех форм
 function renderLoading(isLoading) {
