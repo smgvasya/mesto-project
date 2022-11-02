@@ -22,7 +22,7 @@ export const getInitialCards = () => {
 
 export const getProfile = () => {
   return fetch(`${config.baseUrl}/users/me`, {
-    method: "GET",
+    // method: "GET",
     headers: config.headers,
   })
   .then(testRes);
@@ -40,3 +40,49 @@ export const patchProfile = (name, about) => {
   .then(testRes);
 };
 
+export const postProfile = (name, link) => {
+  return fetch(`${config.baseUrl}/cards`, {
+    method: "POST",
+    headers: config.headers,
+    body: JSON.stringify({
+      name: name,
+      about: link,
+    }),
+  })
+  .then(testRes);
+};
+
+export const deleteCard = (cardId) => {
+  return fetch(`${config.baseUrl}/cards/${cardId}`,{
+      method: "DELETE",
+      headers: config.headers,
+  })
+  .then(testRes);
+}
+
+export const patchAvatar = (link) => {
+  return fetch(`${config.baseUrl}/users/me/avatar`, {
+    method: "PATCH",
+    headers: config.headers,
+    body: JSON.stringify({
+      avatar: link,
+    }),
+  })
+  .then(testRes);
+};
+
+export const putLike = (cardId) => {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`,{
+      method: "PUT",
+      headers: config.headers,
+  })
+  .then(testRes);
+}
+
+export const deleteLike = (cardId) => {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`,{
+      method: "DELETE",
+      headers: config.headers,
+  })
+  .then(testRes);
+}
