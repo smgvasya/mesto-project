@@ -27,7 +27,7 @@ function addCard(element, userId) {
 
   //Удаление карточки
   if (element.owner._id === userId ) {
-    deleteCard(card._id)
+    deleteCard(element._id)
     then(() =>{
       deleteElement.addEventListener('click', (evt) => {
         cardElement.remove();
@@ -53,7 +53,7 @@ if (userId) { // узнаём кто ставит лайк
 }
   //если лайк активен удалить, если нет добавить
 if (elementLikes.classList.contains('element__button-like_active')) {
-  deleteLike(card._id)
+  deleteLike(element._id)
   .then ((res) => {
     likeElementCount.textContent = res.likes.length;
     elementLikes.classList.remove('element__button-like_active');
@@ -62,7 +62,7 @@ if (elementLikes.classList.contains('element__button-like_active')) {
     console.log(err);
   });
 } else {
-  putLike(card._id)
+  putLike(element._id)
   .then ((res) => {
     likeElementCount.textContent = res.likes.length;
     elementLikes.classList.add('element__button-like_active');

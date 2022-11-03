@@ -42,7 +42,7 @@ formProfile.addEventListener('submit', submitFormProfile);
 
 
 //Функция формы
-function displayCard(element) {
+function displayCard(element, userId) {
   elementsContainer.prepend(addCard(element, userId));
 }
 
