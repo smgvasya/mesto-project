@@ -11,7 +11,6 @@ import {
 
 
 // Функция добавления новой карточки
-
 function addCard(element, userId) {
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
   const photoElement = cardElement.querySelector('.element__photo');
@@ -25,33 +24,36 @@ function addCard(element, userId) {
   photoElement.alt = element.name
   likeElementCount.textContent = element.likes.length
 
-  //Удаление карточки
-  if (element.owner._id === userId ) {
-    deleteCard(element._id)
-    then(() =>{
-      deleteElement.addEventListener('click', (evt) => {
-        cardElement.remove();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    })
+//Удаление карточки
+const listenerDelCard = () => {
+  deleteCard(element._id)
+  .then(() => {
+    cardElement.remove();
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
+
+if (element.owner._id === userId ) {
+  deleteElement.addEventListener('click', () =>
+    listenerDelCard())
   } else {
     deleteElement.remove();
   }
 
-  //Лайк карточки
-if (userId) { // узнаём кто ставит лайк
-    const likeUser = element.likes.some((userInfo) => {
-      return userInfo._id === userId;
-    });
-    if (likeUser) {
-      elementLikes.addEventListener('click', (evt) => {
-        evt.target.classList.toggle('element__button-like_active');
-      });
-    }
+//определяем кто ставит лайк
+if (userId) {
+  const likeUser = element.likes.some((userInfo) => {
+    return userInfo._id === userId;
+  });
+  if (likeUser) {
+    elementLikes.classList.add('element__button-like_active');
+  }
 }
-  //если лайк активен удалить, если нет добавить
+
+//если лайк активен удалить, если нет добавить
+elementLikes.addEventListener('click', (evt) => {
 if (elementLikes.classList.contains('element__button-like_active')) {
   deleteLike(element._id)
   .then ((res) => {
@@ -71,14 +73,15 @@ if (elementLikes.classList.contains('element__button-like_active')) {
     console.log(err);
   });
 }
+});
 
-  //Открытие модального окна/фото карточки
-  photoElement.addEventListener("click", () => {
-    popupImg.src = element.link;
-    popupPhotoTitle.textContent = element.name;
-    popupImg.alt = element.name;
-    openPopup(popupPhoto);
-  });
+//Открытие модального окна/фото карточки
+photoElement.addEventListener("click", () => {
+  popupImg.src = element.link;
+  popupPhotoTitle.textContent = element.name;
+  popupImg.alt = element.name;
+  openPopup(popupPhoto);
+});
   return cardElement;
 }
 
