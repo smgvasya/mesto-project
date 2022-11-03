@@ -42,8 +42,8 @@ function addCard(element, userId) {
 
   //Лайк карточки
 if (userId) { // узнаём кто ставит лайк
-    const likeUser = element.likes.some((data) => {
-      return data._id === userId;
+    const likeUser = element.likes.some((userInfo) => {
+      return userInfo._id === userId;
     });
     if (likeUser) {
       elementLikes.addEventListener('click', (evt) => {

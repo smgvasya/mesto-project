@@ -43,7 +43,7 @@ formProfile.addEventListener('submit', submitFormProfile);
 
 //Функция формы
 function displayCard(element) {
-  elementsContainer.prepend(addCard(element));
+  elementsContainer.prepend(addCard(element, userId));
 }
 
 //!!!// Функция формы добавления карточки/очистка инпутов
@@ -51,9 +51,12 @@ function submitFormMesto(evt) {
   evt.preventDefault ();
   renderLoading(true);
 
-  postCard(mestoName.value, mestoLink.value)
-  .then((res) => {
-    displayCard(res, userId);
+  postCard({
+       name: mestoName.value,
+       link: mestoLink.value
+     })
+  .then((data) => {
+    displayCard(data);
     closePopup(popupMesto);
     evt.target.reset()
     })
@@ -64,6 +67,7 @@ function submitFormMesto(evt) {
      renderLoading (false)
     });
 }
+
 
 // const newElement = {
 //   name: mestoName.value,

@@ -26,7 +26,6 @@ import { testRes, getProfile, patchProfile, postCard, getInitialCards,
   deleteCard, patchAvatar, putLike, deleteLike } from "./api";
 
 
-// initialCards.reverse();
 
 
 
@@ -61,17 +60,17 @@ addButtonAvatar.addEventListener('click', function (){
 
 //Добавление карточек из кода
 // initialCards.forEach(displayCard);
+// initialCards.reverse();
+
 
 Promise.all([getProfile(), getInitialCards()])
   .then(([userData, cardsData]) => {
-    userId = userData._id;
-
     profileName.textContent = userData.name;
     profileAbout.textContent = userData.about;
     avatarLink.src = userData.avatar;
 
     cardsData.reverse().forEach((element) => {
-      displayCard(elementsContainer, addCard(element, userId));
+      displayCard(elementsContainer, addCard(element, userData._id));
     });
   })
   .catch((err) => {
