@@ -6,42 +6,81 @@ import {
 
   import { openPopup } from "./modal.js";
 
+  import { deleteCard, putLike, deleteLike } from "./api";
+
 
 // Функция добавления новой карточки
-//function addCard({name, link, likes, owner, _id}, userId)
-// const userId = userId - проверка id и далее используем при проверке лайков, иконки дел.
-
-function addCard(element) {
+function addCard(element, userId) {
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
   const photoElement = cardElement.querySelector('.element__photo');
   const titleElement = cardElement.querySelector('.element__title');
+  const likeElementCount = cardElement.querySelector('.element__like-count');
+  const deleteElement = cardElement.querySelector('.element__button-trash');
+  const elementLikes = cardElement.querySelector('.element__button-like');
 
   titleElement.textContent = element.name
   photoElement.src = element.link
   photoElement.alt = element.name
+  likeElementCount.textContent = element.likes.length
 
-
-  //Удаление карточки
-  const deleteElement = cardElement.querySelector('.element__button-trash');
-
-  deleteElement.addEventListener('click', (evt) => {
+//Удаление карточки
+const listenerDelCard = () => {
+  deleteCard(element._id)
+  .then(() => {
     cardElement.remove();
+  })
+  .catch((err) => {
+    console.log(err);
   });
+}
 
-  //Лайк карточки
-  const elementLikes = cardElement.querySelector('.element__button-like');
+if (element.owner._id === userId ) {
+  deleteElement.addEventListener('click', () =>
+    listenerDelCard())
+  } else {
+    deleteElement.remove();
+  }
 
-  elementLikes.addEventListener('click', (evt) => {
-    evt.target.classList.toggle('element__button-like_active');
+//определяем кто ставит лайк
+if (userId) {
+  const likeUser = element.likes.some((userInfo) => {
+    return userInfo._id === userId;
   });
+  if (likeUser) {
+    elementLikes.classList.add('element__button-like_active');
+  }
+}
 
-  //Открытие модального окна/фото карточки
-  photoElement.addEventListener("click", () => {
-    popupImg.src = element.link;
-    popupPhotoTitle.textContent = element.name;
-    popupImg.alt = element.name;
-    openPopup(popupPhoto);
+//если лайк активен удалить, если нет добавить
+elementLikes.addEventListener('click', (evt) => {
+if (elementLikes.classList.contains('element__button-like_active')) {
+  deleteLike(element._id)
+  .then ((res) => {
+    likeElementCount.textContent = res.likes.length;
+    elementLikes.classList.remove('element__button-like_active');
+  })
+  .catch((err) => {
+    console.log(err);
   });
+} else {
+  putLike(element._id)
+  .then ((res) => {
+    likeElementCount.textContent = res.likes.length;
+    elementLikes.classList.add('element__button-like_active');
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
+});
+
+//Открытие модального окна/фото карточки
+photoElement.addEventListener("click", () => {
+  popupImg.src = element.link;
+  popupPhotoTitle.textContent = element.name;
+  popupImg.alt = element.name;
+  openPopup(popupPhoto);
+});
   return cardElement;
 }
 
