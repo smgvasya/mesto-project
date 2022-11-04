@@ -11,7 +11,8 @@ import {
   mestoLink,
   avatarLink,
   avatarInput,
-  popupAvatar } from "./constants";
+  popupAvatar,
+  selectors } from "./constants";
 
 import { addCard } from "./card";
 import { closePopup } from "./modal";
@@ -23,7 +24,7 @@ import { testRes, getProfile, patchProfile, postCard, getInitialCards,
 //Функция формы редактирования профиля
 function submitFormProfile (evt) {
   evt.preventDefault();
-  renderLoading (true)
+  renderLoading (evt.target, true)
 
   patchProfile(nameInput.value, aboutInput.value)
     .then((res) => {
@@ -35,7 +36,7 @@ function submitFormProfile (evt) {
       console.log(err)
     })
     .finally(() => {
-     renderLoading (false)
+     renderLoading (evt.target, false)
     });
 }
 formProfile.addEventListener('submit', submitFormProfile);
@@ -49,35 +50,25 @@ function displayCard(element, userId) {
 //!!!// Функция формы добавления карточки/очистка инпутов
 function submitFormMesto(evt) {
   evt.preventDefault ();
-  renderLoading (true)
+  renderLoading (evt.target, true)
   postCard(mestoName.value, mestoLink.value)
   .then((res) => {
-    displayCard(res, data.userId);
+    displayCard(res);
     closePopup(popupMesto);
     evt.target.reset()
     })
-    .catch((err) => {
+  .catch((err) => {
       console.log(err)
-    })
-    .finally(() => {
-      renderLoading (false)
-    });
-
+   })
+  .finally(() => {
+      renderLoading (evt.target, false)
+  });
 }
-
-
-// const newElement = {
-//   name: mestoName.value,
-//   link: mestoLink.value
-// };
-
-// displayCard(newElement);
-// closePopup(popupMesto);
 
 //Функция формы редактирования аватара
 function submitFormAvatar(evt) {
   evt.preventDefault ();
-  renderLoading (true)
+  renderLoading (evt.target, true)
 
   patchAvatar(avatarInput.value)
   .then((res) =>{
@@ -89,18 +80,18 @@ function submitFormAvatar(evt) {
     console.log(err)
   })
   .finally(() => {
-    renderLoading (false)
+    renderLoading (evt.target, false)
   });
 }
 
 
 // Улучшенный UX всех форм
-function renderLoading(isLoading) {
-  const submitText = document.querySelector('.form__input')
+function renderLoading(formElement, isLoading) {
+   const btnSubmit = formElement.querySelector(selectors.buttonSelector)
   if (isLoading) {
-    submitText.textContent = "Сохранение...";
+    btnSubmit.textContent = "Сохранение...";
   } else {
-    submitText.textContent = "Сохранить";
+    btnSubmit.textContent = "Сохранить";
   }
 }
 
