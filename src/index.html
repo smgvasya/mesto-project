@@ -16,11 +16,12 @@
 
         <main>
             <section class="profile">
+              <button class="profile__button-avatar"></button>
                 <img class="profile__avatar" src="https://img.freepik.com/free-photo/street-with-blue-police-box-in-glasgow-united-kingdom-old-traditional-buildings-cloudy-weather_1268-19744.jpg?w=740&t=st=1661697763~exp=1661698363~hmac=0ad254577e4591e6e08e6271aaa56ab5d98299c366ad83551b3d2089c17bc9bc" alt="Аватар" />
                 <div class="profile__info">
-                    <h1 class="profile__name">ТАРДИС</h1>
+                    <h1 class="profile__name"></h1>
                     <button class="profile__button" type="button"></button>
-                    <p class="profile__about">Сложное пространственно-временное событие</p>
+                    <p class="profile__about"></p>
                 </div>
                 <button class="profile__button-photo" type="button"></button>
             </section>
@@ -55,6 +56,24 @@
             </div>
         </div>
 
+        <div class="popup" id='popup-avatar'>
+          <div class="popup__container">
+              <h2 class="popup__heading">Обновить аватар</h2>
+              <button class="popup__button-close popup__close" id='popup-profile-close' type="button">
+                  <img class="popup__button-close-icon" src= "<%=require('./images/close_icon.svg')%>" alt="Закрыть" />
+              </button>
+              <form class="form" name="form-edit-avatar" id="form-avatar" novalidate>
+                  <fieldset class="form__profile" id="fieldset-avatar">
+
+                    <input class="form__input" type="url" id="avatar-link" name="avatar-link" placeholder="Cсылка на новый аватар"required/>
+                    <span class="avatar-link-error form__input-error"></span>
+
+                      <button class="form__submit" id='popup-submit-avatar' type="submit">Сохранить</button>
+                  </fieldset>
+              </form>
+          </div>
+      </div>
+
         <div class="popup" id='popup-mesto'>
             <div class="popup__container">
                 <h2 class="popup__heading">Новое место</h2>
@@ -80,7 +99,7 @@
                 <button class="popup__button-close popup__close" id="popup-photo-close" type="button">
                     <img class="popup__button-close-icon" src= "<%=require('./images/close_icon.svg')%>" alt="Закрыть" />
                 </button>
-                <img src="#" class="popup__img" alt="none" />
+                <img src="#" class="popup__img" alt="" />
                 <h2 class="popup__photo-title">Карачаевск</h2>
             </div>
         </div>
@@ -88,10 +107,13 @@
         <template id="card-template">
             <li class="element">
                 <button class="element__button-trash" type="button"></button>
-                <img src="#" class="element__photo" alt="none"/>
+                <img src="#" class="element__photo" alt=""/>
                 <div class="element__about">
-                    <h2 class="element__title">Карачаево-Черкесия</h2>
+                    <h2 class="element__title"></h2>
+                    <div class="element__like-container">
                     <button class="element__button-like" type="button"></button>
+                    <span class="element__like-count"></span>
+                  </div>
                 </div>
             </li>
         </template>

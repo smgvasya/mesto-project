@@ -8,43 +8,91 @@ import {
   popupMesto,
   elementsContainer,
   mestoName,
-  mestoLink } from "./constants.js";
+  mestoLink,
+  avatarLink,
+  avatarInput,
+  popupAvatar,
+  selectors } from "./constants";
 
 import { addCard } from "./card";
 import { closePopup } from "./modal";
+
+import { patchProfile, postCard, patchAvatar } from "./api";
 
 
 //Функция формы редактирования профиля
 function submitFormProfile (evt) {
   evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileAbout.textContent = aboutInput.value;
-  closePopup(popupProfile);
+  renderLoading (evt.target, true)
+
+  patchProfile(nameInput.value, aboutInput.value)
+    .then((res) => {
+      profileName.textContent = res.name;
+      profileAbout.textContent = res.about;
+      closePopup(popupProfile);
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    .finally(() => {
+     renderLoading (evt.target, false)
+    });
 }
 formProfile.addEventListener('submit', submitFormProfile);
 
 
 //Функция формы
-function displayCard(element) {
-  elementsContainer.prepend(addCard(element));
+function displayCard(element, userId) {
+  elementsContainer.prepend(addCard(element, userId));
 }
-
 
 // Функция формы добавления карточки/очистка инпутов
 function submitFormMesto(evt) {
   evt.preventDefault ();
-
-  const newElement = {
-    name: mestoName.value,
-    link: mestoLink.value
-  };
-
-  displayCard(newElement);
-  closePopup(popupMesto);
-
-  evt.target.reset()
-
+  renderLoading (evt.target, true)
+  postCard(mestoName.value, mestoLink.value)
+  .then((res) => {
+    displayCard(res, res.owner._id);
+    closePopup(popupMesto);
+    evt.target.reset();
+    })
+  .catch((err) => {
+      console.log(err)
+   })
+  .finally(() => {
+      renderLoading (evt.target, false)
+  });
 }
 
-export { submitFormMesto, submitFormProfile, displayCard };
+//Функция формы редактирования аватара
+function submitFormAvatar(evt) {
+  evt.preventDefault ();
+  renderLoading (evt.target, true)
+
+  patchAvatar(avatarInput.value)
+  .then((res) =>{
+    avatarLink.src = res.avatar;
+    closePopup(popupAvatar);
+    evt.target.reset();
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+  .finally(() => {
+    renderLoading (evt.target, false)
+  });
+}
+
+
+// Улучшенный UX всех форм
+function renderLoading(formElement, isLoading) {
+   const btnSubmit = formElement.querySelector(selectors.buttonSelector)
+  if (isLoading) {
+    btnSubmit.textContent = "Сохранение...";
+  } else {
+    btnSubmit.textContent = "Сохранить";
+  }
+}
+
+export { submitFormMesto, submitFormProfile, displayCard, submitFormAvatar, renderLoading };
 

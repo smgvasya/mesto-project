@@ -1,6 +1,5 @@
 import "../pages/index.css";
 import {
-  initialCards,
   addButtonProfile,
   addButtonPhoto,
   popupProfile,
@@ -11,15 +10,21 @@ import {
   popupMesto,
   formMesto,
   closeButtons,
-  selectors
-  } from "./constants.js";
+  selectors,
+  avatarLink,
+  formAvatar,
+  addButtonAvatar,
+  popupAvatar  } from "./constants.js";
 
 import { enableValidation, preparePopup } from "./validate.js";
 import { openPopup, closePopup, closePopupOverlay } from "./modal.js";
-import { submitFormMesto, displayCard } from "./utils.js";
+import { submitFormMesto, displayCard, submitFormAvatar } from "./utils.js";
+
+import { getProfile, getInitialCards } from "./api";
 
 
-initialCards.reverse();
+
+
 
 //Открытие окна редактирования профиля
 addButtonProfile.addEventListener('click', function (){
@@ -43,11 +48,35 @@ addButtonPhoto.addEventListener('click', function (){
   preparePopup(selectors);
 });
 
+//Открытие окна обновления аватара
+addButtonAvatar.addEventListener('click', function (){
+  openPopup(popupAvatar);
+  preparePopup(selectors);
+});
+
 
 //Добавление карточек из кода
-initialCards.forEach(displayCard);
+// initialCards.forEach(displayCard);
+// initialCards.reverse();
 
+
+Promise.all([getProfile(), getInitialCards()])
+  .then(([userData, cardsData]) => {
+    profileName.textContent = userData.name;
+    profileAbout.textContent = userData.about;
+    avatarLink.src = userData.avatar;
+
+    cardsData.reverse().forEach((element) => {
+      displayCard(element, userData._id);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+formAvatar.addEventListener('submit', submitFormAvatar);
 formMesto.addEventListener ('submit', submitFormMesto);
+
 
 enableValidation(selectors);
 
