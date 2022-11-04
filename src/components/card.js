@@ -6,8 +6,7 @@ import {
 
   import { openPopup } from "./modal.js";
 
-  import { testRes, getProfile, patchProfile, postCard, getInitialCards,
-    deleteCard, patchAvatar, putLike, deleteLike } from "./api";
+  import { deleteCard, putLike, deleteLike } from "./api";
 
 
 // Функция добавления новой карточки

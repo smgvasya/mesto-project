@@ -14,17 +14,13 @@ import {
   avatarLink,
   formAvatar,
   addButtonAvatar,
-  popupAvatar,
-  elementsContainer
-  } from "./constants.js";
+  popupAvatar  } from "./constants.js";
 
 import { enableValidation, preparePopup } from "./validate.js";
 import { openPopup, closePopup, closePopupOverlay } from "./modal.js";
 import { submitFormMesto, displayCard, submitFormAvatar } from "./utils.js";
-import { addCard } from "./card";
 
-import { testRes, getProfile, patchProfile, postCard, getInitialCards,
-  deleteCard, patchAvatar, putLike, deleteLike } from "./api";
+import { getProfile, getInitialCards } from "./api";
 
 
 

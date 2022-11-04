@@ -17,8 +17,7 @@ import {
 import { addCard } from "./card";
 import { closePopup } from "./modal";
 
-import { testRes, getProfile, patchProfile, postCard, getInitialCards,
-  deleteCard, patchAvatar, putLike, deleteLike } from "./api";
+import { patchProfile, postCard, patchAvatar } from "./api";
 
 
 //Функция формы редактирования профиля
@@ -47,15 +46,15 @@ function displayCard(element, userId) {
   elementsContainer.prepend(addCard(element, userId));
 }
 
-//!!!// Функция формы добавления карточки/очистка инпутов
+// Функция формы добавления карточки/очистка инпутов
 function submitFormMesto(evt) {
   evt.preventDefault ();
   renderLoading (evt.target, true)
   postCard(mestoName.value, mestoLink.value)
   .then((res) => {
-    displayCard(res);
+    displayCard(res, res.owner._id);
     closePopup(popupMesto);
-    evt.target.reset()
+    evt.target.reset();
     })
   .catch((err) => {
       console.log(err)
