@@ -38,7 +38,7 @@ export const postCard = (name, link) => {
     headers: config.headers,
     body: JSON.stringify({
       name: name,
-      about: link,
+      link: link,
     }),
   })
   .then(testRes);

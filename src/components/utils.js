@@ -23,7 +23,7 @@ import { testRes, getProfile, patchProfile, postCard, getInitialCards,
 //Функция формы редактирования профиля
 function submitFormProfile (evt) {
   evt.preventDefault();
-  renderLoading(true);
+  renderLoading (true)
 
   patchProfile(nameInput.value, aboutInput.value)
     .then((res) => {
@@ -49,14 +49,10 @@ function displayCard(element, userId) {
 //!!!// Функция формы добавления карточки/очистка инпутов
 function submitFormMesto(evt) {
   evt.preventDefault ();
-  renderLoading(true);
-
-  postCard({
-       name: mestoName.value,
-       link: mestoLink.value
-     })
-  .then((data) => {
-    displayCard(data);
+  renderLoading (true)
+  postCard(mestoName.value, mestoLink.value)
+  .then((res) => {
+    displayCard(res, data.userId);
     closePopup(popupMesto);
     evt.target.reset()
     })
@@ -64,8 +60,9 @@ function submitFormMesto(evt) {
       console.log(err)
     })
     .finally(() => {
-     renderLoading (false)
+      renderLoading (false)
     });
+
 }
 
 
@@ -80,7 +77,7 @@ function submitFormMesto(evt) {
 //Функция формы редактирования аватара
 function submitFormAvatar(evt) {
   evt.preventDefault ();
-  renderLoading(true)
+  renderLoading (true)
 
   patchAvatar(avatarInput.value)
   .then((res) =>{
@@ -92,7 +89,7 @@ function submitFormAvatar(evt) {
     console.log(err)
   })
   .finally(() => {
-   renderLoading (false)
+    renderLoading (false)
   });
 }
 
