@@ -1,7 +1,7 @@
 import "../pages/index.css";
 import {
-  addButtonProfile,
-  addButtonPhoto,
+  profileOpenButton,
+  mestoOpenButton,
   popupProfile,
   profileName,
   profileAbout,
@@ -9,56 +9,49 @@ import {
   aboutInput,
   popupMesto,
   formMesto,
-  closeButtons,
+  popupCloseButtons,
   selectors,
   avatarLink,
   formAvatar,
-  addButtonAvatar,
+  avatarOpenButton,
   popupAvatar  } from "./constants.js";
 
 import { enableValidation, preparePopup } from "./validate.js";
 import { openPopup, closePopup, closePopupOverlay } from "./modal.js";
-import { submitFormMesto, displayCard, submitFormAvatar } from "./utils.js";
+import { submitFormMesto, addCardToContainer, submitFormAvatar } from "./utils.js";
 
 import { getProfile, getInitialCards } from "./api";
 
-
-
-
-
 //Открытие окна редактирования профиля
-addButtonProfile.addEventListener('click', function (){
+profileOpenButton.addEventListener('click', function (){
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
   openPopup(popupProfile);
-  preparePopup(selectors);
+  preparePopup(popupProfile, selectors);
 });
 
 //Закрытие всех модальных окон
 
-closeButtons.forEach((button) => {
+popupCloseButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
-  closePopupOverlay (popup);
+  closePopupOverlay(popup);
 });
 
 //Открытие окна добавление карточки
-addButtonPhoto.addEventListener('click', function (){
+mestoOpenButton.addEventListener('click', function (){
   openPopup(popupMesto);
-  preparePopup(selectors);
+  preparePopup(popupMesto, selectors);
 });
 
 //Открытие окна обновления аватара
-addButtonAvatar.addEventListener('click', function (){
+avatarOpenButton.addEventListener('click', function (){
   openPopup(popupAvatar);
-  preparePopup(selectors);
+  preparePopup(popupAvatar, selectors);
 });
 
 
 //Добавление карточек из кода
-// initialCards.forEach(displayCard);
-// initialCards.reverse();
-
 
 Promise.all([getProfile(), getInitialCards()])
   .then(([userData, cardsData]) => {
@@ -67,7 +60,7 @@ Promise.all([getProfile(), getInitialCards()])
     avatarLink.src = userData.avatar;
 
     cardsData.reverse().forEach((element) => {
-      displayCard(element, userData._id);
+      addCardToContainer(element, userData._id);
     });
   })
   .catch((err) => {

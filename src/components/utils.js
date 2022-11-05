@@ -14,7 +14,7 @@ import {
   popupAvatar,
   selectors } from "./constants";
 
-import { addCard } from "./card";
+import { createCard } from "./card";
 import { closePopup } from "./modal";
 
 import { patchProfile, postCard, patchAvatar } from "./api";
@@ -42,8 +42,8 @@ formProfile.addEventListener('submit', submitFormProfile);
 
 
 //Функция формы
-function displayCard(element, userId) {
-  elementsContainer.prepend(addCard(element, userId));
+function addCardToContainer(element, userId) {
+  elementsContainer.prepend(createCard(element, userId));
 }
 
 // Функция формы добавления карточки/очистка инпутов
@@ -52,7 +52,7 @@ function submitFormMesto(evt) {
   renderLoading (evt.target, true)
   postCard(mestoName.value, mestoLink.value)
   .then((res) => {
-    displayCard(res, res.owner._id);
+    addCardToContainer(res, res.owner._id);
     closePopup(popupMesto);
     evt.target.reset();
     })
@@ -94,5 +94,5 @@ function renderLoading(formElement, isLoading) {
   }
 }
 
-export { submitFormMesto, submitFormProfile, displayCard, submitFormAvatar, renderLoading };
+export { submitFormMesto, submitFormProfile, addCardToContainer, submitFormAvatar, renderLoading };
 
