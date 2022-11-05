@@ -27,7 +27,7 @@ profileOpenButton.addEventListener('click', function (){
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
   openPopup(popupProfile);
-  preparePopup(selectors);
+  preparePopup(popupProfile, selectors);
 });
 
 //Закрытие всех модальных окон
@@ -41,13 +41,13 @@ popupCloseButtons.forEach((button) => {
 //Открытие окна добавление карточки
 mestoOpenButton.addEventListener('click', function (){
   openPopup(popupMesto);
-  preparePopup(selectors);
+  preparePopup(popupMesto, selectors);
 });
 
 //Открытие окна обновления аватара
 avatarOpenButton.addEventListener('click', function (){
   openPopup(popupAvatar);
-  preparePopup(selectors);
+  preparePopup(popupAvatar, selectors);
 });
 
 

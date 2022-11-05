@@ -15,7 +15,7 @@ function closePopup(popup)  {
 //Функция закрытия мадальных окон по esc
 function closePopupEsc (evt) {
   if (evt.key === 'Escape') {
-    const popup = document.querySelector(selectors.popupSelector);
+    const popup = document.querySelector('.popup_opened');
     closePopup(popup);
   }
 };
@@ -29,4 +29,4 @@ function closePopupOverlay (popup) {
   });
 }
 
-  export { openPopup, closePopup, closePopupEsc, closePopupOverlay };
+export { openPopup, closePopup, closePopupEsc, closePopupOverlay };

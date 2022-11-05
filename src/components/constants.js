@@ -28,7 +28,6 @@ const popupCloseButtons = document.querySelectorAll('.popup__close');
 const cardTemplate = document.querySelector('#card-template').content;
 
 const selectors = ({
-  popupSelector: ".popup_opened", //класс для откр/закр попапов
   formSelector: ".form", //класс у всех форм
   formInputSelector: ".form__input", //класс у всех инпутов
   buttonSelector: ".form__submit", // кнопка активная
