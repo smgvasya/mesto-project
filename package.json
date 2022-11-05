@@ -21,8 +21,7 @@
   },
   "homepage": "https://github.com/smgvasya/mesto-project#readme",
   "dependencies": {
-    "core-js": "^3.26.0",
-    "jquery": "^3.6.1"
+    "core-js": "^3.26.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.6",

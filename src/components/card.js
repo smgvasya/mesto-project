@@ -8,9 +8,23 @@ import {
 
   import { deleteCard, putLike, deleteLike } from "./api";
 
+//DOM удаление элемента
+const removeElement = (element) => {
+  element.remove();
+}
+
+//пересчёт лайков
+const countLike = (elementCount, likesArr) => {
+  elementCount.textContent = likesArr.length;
+}
+//переключение лайков
+const toggleLikeActive = (element) => {
+  element.classList.toggle('element__button-like_active');
+}
+
 
 // Функция добавления новой карточки
-function addCard(element, userId) {
+function createCard(element, userId) {
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
   const photoElement = cardElement.querySelector('.element__photo');
   const titleElement = cardElement.querySelector('.element__title');
@@ -21,43 +35,44 @@ function addCard(element, userId) {
   titleElement.textContent = element.name
   photoElement.src = element.link
   photoElement.alt = element.name
-  likeElementCount.textContent = element.likes.length
+  countLike(likeElementCount, element.likes);
 
-//Удаление карточки
-const listenerDelCard = () => {
-  deleteCard(element._id)
-  .then(() => {
-    cardElement.remove();
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-}
-
+//Удаление карточки или иконки
 if (element.owner._id === userId ) {
   deleteElement.addEventListener('click', () =>
-    listenerDelCard())
+    listenerDelCard(cardElement, element._id))
   } else {
-    deleteElement.remove();
+    removeElement(deleteElement);
   }
 
-//определяем кто ставит лайк
+//Удаление карточки из DOM и сервера
+const listenerDelCard = (cardElement, id) => {
+  deleteCard(id)
+  .then(() => {
+    removeElement(cardElement);
+  })
+  .catch((err) => {
+     console.log(err);
+   });
+}
+
+//Определяем кто ставит лайк
 if (userId) {
   const likeUser = element.likes.some((userInfo) => {
     return userInfo._id === userId;
   });
   if (likeUser) {
-    elementLikes.classList.add('element__button-like_active');
+    toggleLikeActive(elementLikes);
   }
 }
 
-//если лайк активен удалить, если нет добавить
+//Если лайк активен удалить, если нет добавить
 elementLikes.addEventListener('click', (evt) => {
 if (elementLikes.classList.contains('element__button-like_active')) {
   deleteLike(element._id)
   .then ((res) => {
-    likeElementCount.textContent = res.likes.length;
-    elementLikes.classList.remove('element__button-like_active');
+    countLike(likeElementCount, res.likes);
+    toggleLikeActive(elementLikes);
   })
   .catch((err) => {
     console.log(err);
@@ -65,8 +80,8 @@ if (elementLikes.classList.contains('element__button-like_active')) {
 } else {
   putLike(element._id)
   .then ((res) => {
-    likeElementCount.textContent = res.likes.length;
-    elementLikes.classList.add('element__button-like_active');
+    countLike(likeElementCount, res.likes);
+    toggleLikeActive(elementLikes);
   })
   .catch((err) => {
     console.log(err);
@@ -84,4 +99,4 @@ photoElement.addEventListener("click", () => {
   return cardElement;
 }
 
-export { addCard };
+export { createCard };

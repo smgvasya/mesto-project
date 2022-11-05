@@ -44,7 +44,7 @@ const toggleButtonState = (inputList, buttonElement, selectors) => {
 };
 
 const setEventListeners = (formElement, selectors) => {
-  const inputList = Array.from(formElement.querySelectorAll(selectors.inputSelector));
+  const inputList = Array.from(formElement.querySelectorAll(selectors.formInputSelector));
   const buttonElement = formElement.querySelector(selectors.buttonSelector);
 
   inputList.forEach((inputElement) => {
@@ -59,7 +59,7 @@ function preparePopup(selectors) {
   const popup = document.querySelector(selectors.popupSelector);
   const formElement = popup.querySelector(selectors.formSelector);
   const inputList = Array.from(
-    formElement.querySelectorAll(selectors.inputSelector)
+    formElement.querySelectorAll(selectors.formInputSelector)
   );
   const buttonElement = formElement.querySelector(selectors.buttonSelector);
   toggleButtonState(inputList, buttonElement, selectors);
