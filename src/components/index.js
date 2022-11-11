@@ -50,9 +50,6 @@ avatarOpenButton.addEventListener('click', function (){
   preparePopup(popupAvatar, selectors);
 });
 
-
-//Добавление карточек из кода
-
 Promise.all([getProfile(), getInitialCards()])
   .then(([userData, cardsData]) => {
     profileName.textContent = userData.name;
