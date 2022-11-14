@@ -14,13 +14,23 @@ import {
   avatarLink,
   formAvatar,
   avatarOpenButton,
-  popupAvatar  } from "./constants.js";
+  popupAvatar,
+  formProfile
+} from "./constants.js";
 
 import { enableValidation, preparePopup } from "./validate.js";
 import { openPopup, closePopup, closePopupOverlay } from "./modal.js";
-import { submitFormMesto, addCardToContainer, submitFormAvatar } from "./utils.js";
+import { submitFormMesto, addCardToContainer, submitFormAvatar, submitFormProfile } from "./utils.js";
 
-import { getProfile, getInitialCards } from "./api";
+import Api from "./api";
+
+const api = new Api({
+  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-16',
+  headers: {
+    authorization: '726accf3-eb3a-4622-8e8a-72bee3135f81',
+    'Content-Type': 'application/json'
+  }
+});
 
 //Открытие окна редактирования профиля
 profileOpenButton.addEventListener('click', function (){
@@ -53,7 +63,7 @@ avatarOpenButton.addEventListener('click', function (){
 
 //Добавление карточек из кода
 
-Promise.all([getProfile(), getInitialCards()])
+Promise.all([api.getProfile(), api.getInitialCards()])
   .then(([userData, cardsData]) => {
     profileName.textContent = userData.name;
     profileAbout.textContent = userData.about;
@@ -67,9 +77,13 @@ Promise.all([getProfile(), getInitialCards()])
     console.log(err);
   });
 
+const handleFormProfile = (evt) =>{
+  submitFormProfile(evt, api);
+}
+
 formAvatar.addEventListener('submit', submitFormAvatar);
 formMesto.addEventListener ('submit', submitFormMesto);
-
+formProfile.addEventListener('submit', handleFormProfile);
 
 enableValidation(selectors);
 

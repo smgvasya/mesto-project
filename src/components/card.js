@@ -2,11 +2,9 @@ import {
   popupPhoto,
   popupImg,
   popupPhotoTitle,
-  cardTemplate } from "./constants.js";
+  cardTemplate} from "./constants.js";
 
   import { openPopup } from "./modal.js";
-
-  import { deleteCard, putLike, deleteLike } from "./api";
 
 //DOM удаление элемента
 const removeElement = (element) => {
@@ -47,7 +45,7 @@ if (element.owner._id === userId ) {
 
 //Удаление карточки из DOM и сервера
 const listenerDelCard = (cardElement, id) => {
-  deleteCard(id)
+  api.deleteCard(id)
   .then(() => {
     removeElement(cardElement);
   })
@@ -69,7 +67,7 @@ if (userId) {
 //Если лайк активен удалить, если нет добавить
 elementLikes.addEventListener('click', (evt) => {
 if (elementLikes.classList.contains('element__button-like_active')) {
-  deleteLike(element._id)
+  api.deleteLike(element._id)
   .then ((res) => {
     countLike(likeElementCount, res.likes);
     toggleLikeActive(elementLikes);
@@ -78,7 +76,7 @@ if (elementLikes.classList.contains('element__button-like_active')) {
     console.log(err);
   });
 } else {
-  putLike(element._id)
+  api.putLike(element._id)
   .then ((res) => {
     countLike(likeElementCount, res.likes);
     toggleLikeActive(elementLikes);
