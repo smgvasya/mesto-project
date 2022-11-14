@@ -4,7 +4,6 @@ import {
   profileAbout,
   nameInput,
   aboutInput,
-  formProfile,
   popupMesto,
   elementsContainer,
   mestoName,
@@ -17,15 +16,12 @@ import {
 import { createCard } from "./card";
 import { closePopup } from "./modal";
 
-import { patchProfile, postCard, patchAvatar } from "./api";
-
-
 //Функция формы редактирования профиля
-function submitFormProfile (evt) {
+function submitFormProfile (evt, api) {
   evt.preventDefault();
   renderLoading (evt.target, true)
 
-  patchProfile(nameInput.value, aboutInput.value)
+  api.patchProfile({name: nameInput.value, about: aboutInput.value})
     .then((res) => {
       profileName.textContent = res.name;
       profileAbout.textContent = res.about;
@@ -38,8 +34,6 @@ function submitFormProfile (evt) {
      renderLoading (evt.target, false)
     });
 }
-formProfile.addEventListener('submit', submitFormProfile);
-
 
 //Функция формы
 function addCardToContainer(element, userId) {
@@ -50,7 +44,7 @@ function addCardToContainer(element, userId) {
 function submitFormMesto(evt) {
   evt.preventDefault ();
   renderLoading (evt.target, true)
-  postCard(mestoName.value, mestoLink.value)
+  api.postCard(mestoName.value, mestoLink.value)
   .then((res) => {
     addCardToContainer(res, res.owner._id);
     closePopup(popupMesto);
@@ -69,7 +63,7 @@ function submitFormAvatar(evt) {
   evt.preventDefault ();
   renderLoading (evt.target, true)
 
-  patchAvatar(avatarInput.value)
+  api.patchAvatar(avatarInput.value)
   .then((res) =>{
     avatarLink.src = res.avatar;
     closePopup(popupAvatar);
