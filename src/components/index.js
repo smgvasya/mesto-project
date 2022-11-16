@@ -22,7 +22,8 @@ import { enableValidation, preparePopup } from "./validate.js";
 import { openPopup, closePopup, closePopupOverlay } from "./modal.js";
 import { submitFormMesto, addCardToContainer, submitFormAvatar, submitFormProfile } from "./utils.js";
 
-import Api from "./api";
+import Api from "./Api";
+import Popup from "./Popup";
 
 const api = new Api({
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-16',
@@ -32,21 +33,25 @@ const api = new Api({
   }
 });
 
+const popupEditForm = new Popup('#popup-profile');
+popupEditForm.setEventListeners();
+
 //Открытие окна редактирования профиля
 profileOpenButton.addEventListener('click', function (){
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
-  openPopup(popupProfile);
+  // openPopup(popupProfile);
+  popupEditForm.open();
   preparePopup(popupProfile, selectors);
 });
 
 //Закрытие всех модальных окон
 
-popupCloseButtons.forEach((button) => {
-  const popup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(popup));
-  closePopupOverlay(popup);
-});
+// popupCloseButtons.forEach((button) => {
+//   const popup = button.closest('.popup');
+//   button.addEventListener('click', () => closePopup(popup));
+//   closePopupOverlay(popup);
+// });
 
 //Открытие окна добавление карточки
 mestoOpenButton.addEventListener('click', function (){
