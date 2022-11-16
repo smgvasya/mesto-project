@@ -1,50 +1,30 @@
 export default class Popup {
-constructor(){
+  constructor(containerSelector){
+    this._container = document.querySelector(containerSelector);
+  }
 
-}
-open(){
+  open(){
+    this._container.classList.add('popup_opened');
+    document.addEventListener("keydown", this._handleEscClose.bind(this));
+  }
 
-}
-close(){
+  close(){
+    this._container.classList.remove('popup_opened');
+    document.removeEventListener("keydown", this._handleEscClose);
+  }
 
-}
-_handleEscClose(){
-//Функция закрытия мадальных окон по esc
-// function closePopupEsc (evt) {
-//   if (evt.key === 'Escape') {
-//     const popup = document.querySelector('.popup_opened');
-//     closePopup(popup);
-//  }
-// };
-}
+  _handleEscClose(evt){
+    if (evt.key === 'Escape') {
+      this.close();
+    }
+  }
 
- setEventListeners() {
-    //Содержит публичный метод setEventListeners, который добавляет слушатель клика
-    //иконке закрытия попапа. Модальное окно также закрывается при клике на затемнённую
-    //область вокруг формы.
+  setEventListeners() {
+    const obj = this;
+    this._container.addEventListener('click', (evt) => {
+      if (evt.target.classList.contains('popup__button-close-icon')||evt.target.classList.contains('popup_opened')){
+        obj.close();
+      }
+    });
   }
 }
-
-
-//   //Функция открытие модальных окон
-// function openPopup(popup)  {
-//   popup.classList.add('popup_opened');
-//   document.addEventListener("keydown", closePopupEsc);
-// }
-
-// //Функция закрытия модальных окон
-// function closePopup(popup)  {
-//   popup.classList.remove('popup_opened');
-//   document.removeEventListener("keydown", closePopupEsc);
-// }
-
-// //Функция закрытия мадальных окон при клике на оверлей
-// function closePopupOverlay (popup) {
-//   popup.addEventListener('mousedown', (evt) => {
-//     if(evt.target === evt.currentTarget){
-//       closePopup(popup);
-//     };
-//   });
-// }
-
-// export { openPopup, closePopup, closePopupEsc, closePopupOverlay };
