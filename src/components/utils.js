@@ -15,7 +15,6 @@ import {
 
 import { createCard } from "./card";
 import { closePopup } from "./modal";
-import PopupWithForm from "./PopupWithForm";
 
 //Функция формы редактирования профиля
 function submitFormProfile (evt, api) {

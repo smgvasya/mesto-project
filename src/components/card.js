@@ -7,6 +7,19 @@ import {
 import { openPopup } from "./modal.js";
 import PopupWithImage from "./PopupWithImage.js";
 
+
+export default class Card {
+  constructor(element, userId, cardTemplate) {
+    this._userId = userId;
+    this._cardTemplate = cardTemplate;
+    this._id = element;
+    this._owner = element.owner._id;
+    this._img = element.link;
+    this._name = element.name;
+  }
+
+}
+
 //DOM удаление элемента
 const removeElement = (element) => {
   element.remove();

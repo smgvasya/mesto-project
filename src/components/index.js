@@ -68,9 +68,9 @@ profileFormValidator.enableValidation();
 popupEditForm.setEventListeners();
 
 // const popupAvatarForm = new PopupWithForm(popupAvatar, {
-//   handleSubmitForm: (avatarInput) => {
-//     renderLoading (evt.target, true)
-//     api.patchAvatar(avatarInput.value)
+//   handleSubmitForm: (data) => {
+//     renderLoading (evt.target, true);
+//     api.patchAvatar(data.avatarInput)
 //     .then((res) =>{
 //       avatarLink.src = res.avatar;
 //       submitFormAvatar.close();
