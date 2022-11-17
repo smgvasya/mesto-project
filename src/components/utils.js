@@ -15,6 +15,7 @@ import {
 
 import { createCard } from "./card";
 import { closePopup } from "./modal";
+import PopupWithForm from "./PopupWithForm";
 
 //Функция формы редактирования профиля
 function submitFormProfile (evt, api) {
@@ -58,7 +59,25 @@ function submitFormMesto(evt) {
   });
 }
 
-//Функция формы редактирования аватара
+
+//  const submitFormAvatar = new PopupWithForm(popupAvatar, {
+//   handleSubmitForm: (avatarInput) => {
+//     renderLoading (evt.target, true)
+//     api.patchAvatar(avatarInput.value)
+//     .then((res) =>{
+//       avatarLink.src = res.avatar;
+//       submitFormAvatar.close();
+//     })
+//     .catch((err) => {
+//       console.log(err)
+//     })
+//     .finally(() => {
+//       renderLoading (evt.target, false)
+//     });
+// }
+// })
+
+// Функция формы редактирования аватара
 function submitFormAvatar(evt) {
   evt.preventDefault ();
   renderLoading (evt.target, true)

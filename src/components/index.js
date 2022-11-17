@@ -18,12 +18,14 @@ import {
   formProfile
 } from "./constants.js";
 
-import { enableValidation, preparePopup } from "./validate.js";
 import { openPopup, closePopup, closePopupOverlay } from "./modal.js";
 import { submitFormMesto, addCardToContainer, submitFormAvatar, submitFormProfile } from "./utils.js";
 
 import Api from "./Api";
 import Popup from "./Popup";
+import FormValidator from "./FormValidator";
+import PopupWithImage from "./PopupWithForm";
+import PopupWithForm from "./PopupWithForm";
 
 const api = new Api({
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-16',
@@ -40,13 +42,35 @@ popupEditForm.setEventListeners();
 profileOpenButton.addEventListener('click', function (){
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
-  // openPopup(popupProfile);
   popupEditForm.open();
-  preparePopup(popupProfile, selectors);
 });
 
-//Закрытие всех модальных окон
+//Валидация для каждой фоормы
+const profileFormValidator = new FormValidator(
+  selectors,
+  formProfile
+);
 
+const avatarFormValidator = new FormValidator(
+  selectors,
+  formAvatar
+);
+
+const mestoFormValidator = new FormValidator(
+  selectors,
+  formMesto
+);
+
+mestoFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
+profileFormValidator.enableValidation();
+
+// нью.setEventListeners();
+// нью.setEventListeners();
+// нью.setEventListeners();
+
+
+//Закрытие всех модальных окон
 // popupCloseButtons.forEach((button) => {
 //   const popup = button.closest('.popup');
 //   button.addEventListener('click', () => closePopup(popup));
@@ -56,17 +80,12 @@ profileOpenButton.addEventListener('click', function (){
 //Открытие окна добавление карточки
 mestoOpenButton.addEventListener('click', function (){
   openPopup(popupMesto);
-  preparePopup(popupMesto, selectors);
 });
 
 //Открытие окна обновления аватара
 avatarOpenButton.addEventListener('click', function (){
   openPopup(popupAvatar);
-  preparePopup(popupAvatar, selectors);
 });
-
-
-//Добавление карточек из кода
 
 Promise.all([api.getProfile(), api.getInitialCards()])
   .then(([userData, cardsData]) => {
@@ -90,5 +109,4 @@ formAvatar.addEventListener('submit', submitFormAvatar);
 formMesto.addEventListener ('submit', submitFormMesto);
 formProfile.addEventListener('submit', handleFormProfile);
 
-enableValidation(selectors);
 

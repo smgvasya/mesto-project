@@ -87,17 +87,3 @@ export default class FormValidator {
       this._setEventListeners();
    };
 }
-
-//  _preparePopup(popup, selectors) {
-//   const formElement = popup.querySelector(selectors.formSelector);//находим форму в попапе
-//   const inputList = Array.from(
-//     formElement.querySelectorAll(selectors.formInputSelector)//инпутные классы
-//   );
-//   const buttonElement = formElement.querySelector(selectors.buttonSelector); // кнопка формы
-//   toggleButtonState(inputList, buttonElement, selectors);// изменяем состояние кнопки
-//   inputList.forEach((inputElement) => {// проверяем состояние инпутов, если инпут пустой - не выводим ошибку
-//     if (inputElement.value !== "") {
-//       checkInputValidity(formElement, inputElement, selectors);
-//     }
-//   });
-// }
