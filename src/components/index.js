@@ -66,26 +66,25 @@ avatarFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 
 popupEditForm.setEventListeners();
-popupAvatarForm.setEventListeners();
-// нью.setEventListeners();
 
+// const popupAvatarForm = new PopupWithForm(popupAvatar, {
+//   handleSubmitForm: (avatarInput) => {
+//     renderLoading (evt.target, true)
+//     api.patchAvatar(avatarInput.value)
+//     .then((res) =>{
+//       avatarLink.src = res.avatar;
+//       submitFormAvatar.close();
+//     })
+//     .catch((err) => {
+//       console.log(err)
+//     })
+//     .finally(() => {
+//       renderLoading (evt.target, false)
+//     });
+//   }
+// });
 
- const popupAvatarForm = new PopupWithForm(popupAvatar, {
-  handleSubmitForm: (avatarInput) => {
-    renderLoading (evt.target, true)
-    api.patchAvatar(avatarInput.value)
-    .then((res) =>{
-      avatarLink.src = res.avatar;
-      submitFormAvatar.close();
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-    .finally(() => {
-      renderLoading (evt.target, false)
-    });
-}
-})
+// popupAvatarForm.setEventListeners();
 
 // Функция формы редактирования аватара
 // function submitFormAvatar(evt) {
@@ -136,8 +135,6 @@ const handleFormProfile = (evt) =>{
   submitFormProfile(evt, api);
 }
 
-formAvatar.addEventListener('submit', popupAvatarForm);
+//formAvatar.addEventListener('submit', popupAvatarForm);
 formMesto.addEventListener ('submit', submitFormMesto);
 formProfile.addEventListener('submit', handleFormProfile);
-
-

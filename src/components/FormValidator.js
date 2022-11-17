@@ -35,7 +35,7 @@ export default class FormValidator {
    _getErrorMessage(inputElement){
       let validationMessage = "";
       if(inputElement.validity.patternMismatch){
-        validationMessage = inputElement.dataset.customError;
+        validationMessage = inputElement.dataset.errorMessage;
       } else {
         validationMessage = inputElement.validationMessage;
       }
@@ -44,9 +44,9 @@ export default class FormValidator {
 
    _checkInputValidity (inputElement) {
       if (!inputElement.validity.valid) {
-         showInputError(inputElement, this._getErrorMessage(inputElement));
+        this._showInputError(inputElement, this._getErrorMessage(inputElement));
       } else {
-         hideInputError(inputElement);
+        this._hideInputError(inputElement);
       }
    };
 
@@ -72,10 +72,11 @@ export default class FormValidator {
       });
 
       this._inputList.forEach((inputElement) => {
-         inputElement.addEventListener('input', function () {
-            this._checkInputValidity(inputElement);
-            this._toggleButtonState ();
-         });
+        const obj = this;
+        inputElement.addEventListener('input', function () {
+          obj._checkInputValidity(inputElement);
+          obj._toggleButtonState ();
+        });
       });
    };
 
