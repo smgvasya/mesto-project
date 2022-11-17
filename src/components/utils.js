@@ -59,44 +59,6 @@ function submitFormMesto(evt) {
   });
 }
 
-
-//  const submitFormAvatar = new PopupWithForm(popupAvatar, {
-//   handleSubmitForm: (avatarInput) => {
-//     renderLoading (evt.target, true)
-//     api.patchAvatar(avatarInput.value)
-//     .then((res) =>{
-//       avatarLink.src = res.avatar;
-//       submitFormAvatar.close();
-//     })
-//     .catch((err) => {
-//       console.log(err)
-//     })
-//     .finally(() => {
-//       renderLoading (evt.target, false)
-//     });
-// }
-// })
-
-// Функция формы редактирования аватара
-function submitFormAvatar(evt) {
-  evt.preventDefault ();
-  renderLoading (evt.target, true)
-
-  api.patchAvatar(avatarInput.value)
-  .then((res) =>{
-    avatarLink.src = res.avatar;
-    closePopup(popupAvatar);
-    evt.target.reset();
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-  .finally(() => {
-    renderLoading (evt.target, false)
-  });
-}
-
-
 // Улучшенный UX всех форм
 function renderLoading(formElement, isLoading) {
    const btnSubmit = formElement.querySelector(selectors.buttonSelector)
@@ -107,5 +69,5 @@ function renderLoading(formElement, isLoading) {
   }
 }
 
-export { submitFormMesto, submitFormProfile, addCardToContainer, submitFormAvatar, renderLoading };
+export { submitFormMesto, submitFormProfile, addCardToContainer, renderLoading };
 

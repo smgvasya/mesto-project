@@ -19,7 +19,7 @@ import {
 } from "./constants.js";
 
 import { openPopup, closePopup, closePopupOverlay } from "./modal.js";
-import { submitFormMesto, addCardToContainer, submitFormAvatar, submitFormProfile } from "./utils.js";
+import { submitFormMesto, addCardToContainer, submitFormProfile, renderLoading } from "./utils.js";
 
 import Api from "./Api";
 import Popup from "./Popup";
@@ -36,7 +36,7 @@ const api = new Api({
 });
 
 const popupEditForm = new Popup('#popup-profile');
-popupEditForm.setEventListeners();
+
 
 //Открытие окна редактирования профиля
 profileOpenButton.addEventListener('click', function (){
@@ -65,27 +65,58 @@ mestoFormValidator.enableValidation();
 avatarFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 
-// нью.setEventListeners();
-// нью.setEventListeners();
+popupEditForm.setEventListeners();
+popupAvatarForm.setEventListeners();
 // нью.setEventListeners();
 
 
-//Закрытие всех модальных окон
-// popupCloseButtons.forEach((button) => {
-//   const popup = button.closest('.popup');
-//   button.addEventListener('click', () => closePopup(popup));
-//   closePopupOverlay(popup);
-// });
+ const popupAvatarForm = new PopupWithForm(popupAvatar, {
+  handleSubmitForm: (avatarInput) => {
+    renderLoading (evt.target, true)
+    api.patchAvatar(avatarInput.value)
+    .then((res) =>{
+      avatarLink.src = res.avatar;
+      submitFormAvatar.close();
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    .finally(() => {
+      renderLoading (evt.target, false)
+    });
+}
+})
+
+// Функция формы редактирования аватара
+// function submitFormAvatar(evt) {
+//   evt.preventDefault ();
+//   renderLoading (evt.target, true)
+
+//   api.patchAvatar(avatarInput.value)
+//   .then((res) =>{
+//     avatarLink.src = res.avatar;
+//     closePopup(popupAvatar);
+//     evt.target.reset();
+//   })
+//   .catch((err) => {
+//     console.log(err)
+//   })
+//   .finally(() => {
+//     renderLoading (evt.target, false)
+//   });
+// }
+
+//Открытие окна обновления аватара
+avatarOpenButton.addEventListener('click', function (){
+  popupAvatarForm.open();
+});
+
 
 //Открытие окна добавление карточки
 mestoOpenButton.addEventListener('click', function (){
   openPopup(popupMesto);
 });
 
-//Открытие окна обновления аватара
-avatarOpenButton.addEventListener('click', function (){
-  openPopup(popupAvatar);
-});
 
 Promise.all([api.getProfile(), api.getInitialCards()])
   .then(([userData, cardsData]) => {
@@ -105,7 +136,7 @@ const handleFormProfile = (evt) =>{
   submitFormProfile(evt, api);
 }
 
-formAvatar.addEventListener('submit', submitFormAvatar);
+formAvatar.addEventListener('submit', popupAvatarForm);
 formMesto.addEventListener ('submit', submitFormMesto);
 formProfile.addEventListener('submit', handleFormProfile);
 
