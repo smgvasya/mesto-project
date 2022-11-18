@@ -18,7 +18,6 @@ import {
   formProfile
 } from "./constants.js";
 
-import { openPopup, closePopup, closePopupOverlay } from "./modal.js";
 import { submitFormMesto, addCardToContainer, submitFormProfile, renderLoading } from "./utils.js";
 
 import Api from "./Api";

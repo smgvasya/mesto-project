@@ -14,7 +14,6 @@ import {
   selectors } from "./constants";
 
 import { createCard } from "./card";
-import { closePopup } from "./modal";
 
 //Функция формы редактирования профиля
 function submitFormProfile (evt, api) {

@@ -4,7 +4,6 @@ import {
   popupPhotoTitle,
   cardTemplate} from "./constants.js";
 
-import { openPopup } from "./modal.js";
 import PopupWithImage from "./PopupWithImage.js";
 
 
