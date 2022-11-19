@@ -13,7 +13,7 @@ const popupMesto = document.querySelector('#popup-mesto');
 const popupPhoto = document.querySelector('#popup-photo');
 const popupImg = document.querySelector('.popup__img');
 const popupPhotoTitle = document.querySelector('.popup__photo-title');
-const elementsContainer = document.querySelector('.elements__container');
+const elementsContainer = '.elements__container';
 
 const mestoName = document.querySelector('#mesto-title');
 const mestoLink = document.querySelector('#mesto-link');

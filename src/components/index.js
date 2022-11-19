@@ -18,15 +18,14 @@ import {
   formProfile,
 } from "./constants.js";
 
-import { submitFormMesto, renderLoading } from "./utils.js";
+import { renderLoading } from "./utils.js";
 
 import Api from "./Api";
-import Popup from "./Popup";
 import FormValidator from "./FormValidator";
 import UserInfo from "./UserInfo";
 import PopupWithImage from "./PopupWithImage";
 import PopupWithForm from "./PopupWithForm";
-import Card from "./card";
+import Card from "./Card";
 import Section from "./Section";
 
 const api = new Api({
@@ -37,14 +36,14 @@ const api = new Api({
   }
 });
 
-// const cardSection = new Section({
-//   data: items,
-//   renderer: (item) => {
-//     const card = new Card(item, '#card-template');
-//     const cardElement = card._generateCard();
-//     cardSection.addItem(cardElement);
-//   }
-//   }, elementsContainer);
+const cardSection = new Section({
+  items: [],
+  renderer: (item) => {
+    const card = new Card(item, userInfo.getUserId(), Card.cardTemplate, listenerClickCard, listenerDelCard, listenerLikeCard);
+    const cardElement = card.getCard();
+    cardSection.addItem(cardElement);
+  }
+  }, elementsContainer);
 
 //Открытие модального окна/фото карточки
 
@@ -67,7 +66,6 @@ const popupEditForm = new PopupWithForm(popupProfileSelector,
   (evt, {'profile-name': profileNewName, 'profile-about':profileNewAbout})=>{
     evt.preventDefault ();
     renderLoading (evt.target, true);
-    console.log()
     api.patchProfile({name: profileNewName, about:profileNewAbout})
       .then((res) =>{;
         userInfo.setUserInfo(res);
@@ -164,10 +162,10 @@ const listenerClickCard = () => {
                    link: this.img});
 }
 
-function addCardToContainer(element) {
-  const newCard = new Card(element, userInfo.getUserId(), Card.cardTemplate, listenerClickCard, listenerDelCard, listenerLikeCard);
-  elementsContainer.prepend(newCard.getCard());
-}
+// function addCardToContainer(element) {
+//   const newCard = new Card(element, userInfo.getUserId(), Card.cardTemplate, listenerClickCard, listenerDelCard, listenerLikeCard);
+//   elementsContainer.prepend(newCard.getCard());
+// }
 
 
 //Открытие окна обновления аватара
@@ -183,9 +181,8 @@ mestoOpenButton.addEventListener('click', function (){
 Promise.all([api.getProfile(), api.getInitialCards()])
   .then(([userData, cardsData]) => {
     userInfo.setUserInfo(userData);
-    cardsData.reverse().forEach((element) => {
-      addCardToContainer(element);
-    });
+    cardSection.setRenderItems(cardsData);
+    cardSection.renderItems();
   })
   .catch((err) => {
     console.log(err);

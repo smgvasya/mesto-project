@@ -12,6 +12,10 @@ export default class Section {
     this._container = document.querySelector(containerSelector);
   }
 
+  setRenderItems(items){
+    this._renderedItems = items;
+  }
+
   renderItems() {
     this._renderedItems.forEach((item) => {
       this._renderer(item);
@@ -19,7 +23,6 @@ export default class Section {
   }
 
   addItem(element) {
-    this._container.prepend(element);
+    this._container.append(element);
   }
 }
-
