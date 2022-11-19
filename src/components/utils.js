@@ -1,3 +1,4 @@
+import Card from "./card";
 import {
   popupProfile,
   profileName,
@@ -9,35 +10,16 @@ import {
   mestoName,
   mestoLink,
   avatarLink,
-  avatarInput,
   popupAvatar,
   selectors } from "./constants";
+import UserInfo from "./UserInfo";
 
-import { createCard } from "./card";
+// import { createCard } from "./card";
 
 //Функция формы редактирования профиля
-function submitFormProfile (evt, api) {
-  evt.preventDefault();
-  renderLoading (evt.target, true)
-
-  api.patchProfile({name: nameInput.value, about: aboutInput.value})
-    .then((res) => {
-      profileName.textContent = res.name;
-      profileAbout.textContent = res.about;
-      closePopup(popupProfile);
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-    .finally(() => {
-     renderLoading (evt.target, false)
-    });
-}
 
 //Функция формы
-function addCardToContainer(element, userId) {
-  elementsContainer.prepend(createCard(element, userId));
-}
+
 
 // Функция формы добавления карточки/очистка инпутов
 function submitFormMesto(evt) {
@@ -67,5 +49,5 @@ function renderLoading(formElement, isLoading) {
   }
 }
 
-export { submitFormMesto, submitFormProfile, addCardToContainer, renderLoading };
+export { submitFormMesto, renderLoading };
 
