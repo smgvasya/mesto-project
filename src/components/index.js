@@ -23,7 +23,7 @@ import FormValidator from "./FormValidator";
 import UserInfo from "./UserInfo";
 import PopupWithImage from "./PopupWithImage";
 import PopupWithForm from "./PopupWithForm";
-import Card from "./Card";
+import Card from "./Сard";
 import Section from "./Section";
 
 const api = new Api({
