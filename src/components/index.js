@@ -131,7 +131,7 @@ profileOpenButton.addEventListener('click', function (){
   nameInput.value = info.name;
   aboutInput.value = info.about;
   popupEditForm.open();
-  profileFormValidator.refreshButtonStatus();
+  profileFormValidator.resetValidation();
 });
 
 const popupAvatarForm = new PopupWithForm(popupAvatarSelector,
@@ -176,13 +176,13 @@ const photoPopup = new PopupWithImage('#popup-photo');
 //Открытие окна обновления аватара
 avatarOpenButton.addEventListener('click', function (){
   popupAvatarForm.open();
-  avatarFormValidator.refreshButtonStatus();
+  avatarFormValidator.resetValidation();
 });
 
 //Открытие окна добавление карточки
 mestoOpenButton.addEventListener('click', function (){
   popupEditMesto.open();
-  mestoFormValidator.refreshButtonStatus();
+  mestoFormValidator.resetValidation();
 });
 
 Promise.all([api.getProfile(), api.getInitialCards()])

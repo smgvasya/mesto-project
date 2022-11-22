@@ -29,18 +29,7 @@ export default class Card {
     return this._userId === owner._id;
   }
 
-  _showDelBtn = () =>{
-    if (this._isMine) {
-      this._deleteElement.addEventListener('click', ()=>{
-        const obj = this;
-        this._handleDelCard(obj);
-      });
-    } else {
-      this._removeElement();
-    }
-  }
-
-  _hasMineLike = () =>{
+  _checkMyLike = () =>{
     const likeUser = this._likes.some((userInfo) => {
       return userInfo._id === this._userId;
     });
@@ -61,22 +50,35 @@ export default class Card {
     this._toggleLikeActive(this._elementLikes);
   }
 
-  _generateCard(){
-    this._titleElement.textContent = this._name
-    this._photoElement.src = this._link
-    this._photoElement.alt = this._name
+  _setEventListener(){
+    if (this._isMine) {
+      this._deleteElement.addEventListener('click', ()=>{
+        const obj = this;
+        this._handleDelCard(obj);
+      });
+    } else {
+        this._removeElement();
+    }
+
     this._photoElement.addEventListener("click", (evt)=>{
       this._handleCardClick(this._photoElement);
     });
-    this._showLikeCount();
-    this._showDelBtn();
-    if (this._hasMineLike()) {
-      this._toggleLikeActive(this._elementLikes);
-    }
+
     this._elementLikes.addEventListener('click', (evt)=>{
       const obj = this;
       this._handleLikeClick(evt, obj);
     });
+    }
+
+  _generateCard(){
+    this._setEventListener();
+    this._titleElement.textContent = this._name
+    this._photoElement.src = this._link
+    this._photoElement.alt = this._name
+    this._showLikeCount();
+    if (this._checkMyLike()) {
+      this._toggleLikeActive(this._elementLikes);
+    }
   }
 
   getCard(){
