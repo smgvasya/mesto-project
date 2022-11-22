@@ -2,71 +2,204 @@ import "../pages/index.css";
 import {
   profileOpenButton,
   mestoOpenButton,
-  popupProfile,
+  popupProfileSelector,
   profileName,
   profileAbout,
   nameInput,
   aboutInput,
   popupMesto,
   formMesto,
-  popupCloseButtons,
+  elementsContainer,
   selectors,
   avatarLink,
   formAvatar,
   avatarOpenButton,
-  popupAvatar  } from "./constants.js";
+  popupAvatarSelector,
+  formProfile,
+} from "./constants.js";
 
-import { enableValidation, preparePopup } from "./validate.js";
-import { openPopup, closePopup, closePopupOverlay } from "./modal.js";
-import { submitFormMesto, addCardToContainer, submitFormAvatar } from "./utils.js";
+import Api from "./Api";
+import FormValidator from "./FormValidator";
+import UserInfo from "./UserInfo";
+import PopupWithImage from "./PopupWithImage";
+import PopupWithForm from "./PopupWithForm";
+import Card from "./Сard";
+import Section from "./Section";
 
-import { getProfile, getInitialCards } from "./api";
+const api = new Api({
+  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-16',
+  headers: {
+    authorization: '726accf3-eb3a-4622-8e8a-72bee3135f81',
+    'Content-Type': 'application/json'
+  }
+});
+
+// Улучшенный UX всех форм
+function renderLoading(formElement, isLoading) {
+  const btnSubmit = formElement.querySelector(selectors.buttonSelector)
+  if (isLoading) {
+    btnSubmit.textContent = "Сохранение...";
+  } else {
+    btnSubmit.textContent = "Сохранить";
+  }
+}
+
+//Валидация для каждой фоормы
+const profileFormValidator = new FormValidator(
+  selectors,
+  formProfile
+);
+
+const avatarFormValidator = new FormValidator(
+  selectors,
+  formAvatar
+);
+
+const mestoFormValidator = new FormValidator(
+  selectors,
+  formMesto
+);
+
+const listenerDelCard = (obj) => {
+  api.deleteCard(obj.id)
+  .then(() => {
+    obj.getCard().remove();
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
+
+const listenerLikeCard = (evt, obj) => {
+  if (evt.target.classList.contains('element__button-like_active')) {
+    api.deleteLike(obj.id)
+    .then ((res) => {
+      obj.setLikeCount(res.likes)
+
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  } else {
+    api.putLike(obj.id)
+    .then ((res) => {
+      obj.setLikeCount(res.likes)
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}};
+
+const listenerClickCard = (photo) => {
+  photoPopup.open(photo);
+}
+
+const cardSection = new Section({
+  items: [],
+  renderer: (item) => {
+    const card = new Card(item, userInfo.getUserId(), Card.cardTemplate, listenerClickCard, listenerDelCard, listenerLikeCard);
+    const cardElement = card.getCard();
+    cardSection.addItem(cardElement);
+  }
+}, elementsContainer);
+
+const userInfo = new UserInfo({nameElementSelector: profileName,
+                               infoElementSelector: profileAbout,
+                               avatarElementSelector: avatarLink});
+
+const popupEditForm = new PopupWithForm(popupProfileSelector,
+  (evt, { 'profile-name': profileNewName, 'profile-about':profileNewAbout })=>{
+    evt.preventDefault ();
+    renderLoading (evt.target, true);
+    api.patchProfile({name: profileNewName, about:profileNewAbout})
+      .then((res) =>{;
+        userInfo.setUserInfo(res);
+        popupEditForm.close();
+      })
+      .catch((err) => {;
+        console.log(err);
+      })
+      .finally(() => {;
+        renderLoading (evt.target, false);
+      });
+  }
+);
 
 //Открытие окна редактирования профиля
 profileOpenButton.addEventListener('click', function (){
-  nameInput.value = profileName.textContent;
-  aboutInput.value = profileAbout.textContent;
-  openPopup(popupProfile);
-  preparePopup(popupProfile, selectors);
+  const info = userInfo.getUserInfo();
+  popupEditForm.setInputValues({'profile-name':info.name,'profile-about':info.about});
+  popupEditForm.open();
+  profileFormValidator.resetValidation();
 });
 
-//Закрытие всех модальных окон
+const popupAvatarForm = new PopupWithForm(popupAvatarSelector,
+  (evt, {'avatar-link':avatarNewLink})=>{
+    evt.preventDefault();
+    renderLoading (evt.target, true);
+    api.patchAvatar(avatarNewLink)
+      .then((res) =>{;
+        userInfo.setUserInfo(res);
+        popupAvatarForm.close();
+      })
+      .catch((err) => {;
+        console.log(err);
+      })
+      .finally(() => {;
+        renderLoading (evt.target, false);
+      });
+  }
+);
 
-popupCloseButtons.forEach((button) => {
-  const popup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(popup));
-  closePopupOverlay(popup);
+// Функция формы добавления карточки/очистка инпутов
+const popupEditMesto = new PopupWithForm(popupMesto,
+  (evt, { 'mesto-title': title, 'mesto-link': link }) => {
+    evt.preventDefault ();
+    renderLoading (evt.target, true)
+    api.postCard({name: title, link: link})
+      .then((res) => {
+        cardSection.setRenderItems([res]);
+        cardSection.renderItems();
+        popupEditMesto.close();
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        renderLoading (evt.target, false)
+      });
+  })
+
+const photoPopup = new PopupWithImage('#popup-photo');
+
+//Открытие окна обновления аватара
+avatarOpenButton.addEventListener('click', function (){
+  popupAvatarForm.open();
+  avatarFormValidator.resetValidation();
 });
 
 //Открытие окна добавление карточки
 mestoOpenButton.addEventListener('click', function (){
-  openPopup(popupMesto);
-  preparePopup(popupMesto, selectors);
+  popupEditMesto.open();
+  mestoFormValidator.resetValidation();
 });
 
-//Открытие окна обновления аватара
-avatarOpenButton.addEventListener('click', function (){
-  openPopup(popupAvatar);
-  preparePopup(popupAvatar, selectors);
-});
-
-Promise.all([getProfile(), getInitialCards()])
+Promise.all([api.getProfile(), api.getInitialCards()])
   .then(([userData, cardsData]) => {
-    profileName.textContent = userData.name;
-    profileAbout.textContent = userData.about;
-    avatarLink.src = userData.avatar;
-
-    cardsData.reverse().forEach((element) => {
-      addCardToContainer(element, userData._id);
-    });
+    userInfo.setUserInfo(userData);
+    cardsData.reverse();
+    cardSection.setRenderItems(cardsData);
+    cardSection.renderItems();
   })
   .catch((err) => {
     console.log(err);
   });
 
-formAvatar.addEventListener('submit', submitFormAvatar);
-formMesto.addEventListener ('submit', submitFormMesto);
+mestoFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
+profileFormValidator.enableValidation();
 
-
-enableValidation(selectors);
-
+photoPopup.setEventListeners();
+popupEditMesto.setEventListeners();
+popupAvatarForm.setEventListeners();
+popupEditForm.setEventListeners();

@@ -1,31 +1,21 @@
 const profileOpenButton = document.querySelector('.profile__button');
 const mestoOpenButton = document.querySelector('.profile__button-photo');
-const popupProfile = document.querySelector('#popup-profile');
+const popupProfileSelector = '#popup-profile';
 
-const profileName = document.querySelector('.profile__name');
-const profileAbout = document.querySelector('.profile__about');
+const profileName ='.profile__name';
+const profileAbout = '.profile__about';
 const nameInput = document.querySelector('#input-name');
 const aboutInput = document.querySelector('#input-about');
 const formProfile = document.querySelector('#form-profile');
 const formMesto = document.querySelector("#edit-mesto");
-const popupMesto = document.querySelector('#popup-mesto');
+const popupMesto = '#popup-mesto';
 
-const popupPhoto = document.querySelector('#popup-photo');
-const popupImg = document.querySelector('.popup__img');
-const popupPhotoTitle = document.querySelector('.popup__photo-title');
-const elementsContainer = document.querySelector('.elements__container');
+const elementsContainer = '.elements__container';
 
-const mestoName = document.querySelector('#mesto-title');
-const mestoLink = document.querySelector('#mesto-link');
-
-const avatarLink = document.querySelector('.profile__avatar');
-const avatarInput = document.querySelector('#avatar-link');
+const avatarLink = '.profile__avatar';
 const formAvatar= document.querySelector("#form-avatar");
 const avatarOpenButton = document.querySelector('.profile__button-avatar');
-const popupAvatar = document.querySelector('#popup-avatar');
-
-const popupCloseButtons = document.querySelectorAll('.popup__close');
-const cardTemplate = document.querySelector('#card-template').content;
+const popupAvatarSelector = '#popup-avatar';
 
 const selectors = ({
   formSelector: ".form", //класс у всех форм
@@ -36,29 +26,19 @@ const selectors = ({
   errorActiveSelector: "form__input-error_active", // делает видимым текст с ошибкой
 });
 
-export {
-  profileOpenButton,
+export {profileOpenButton,
   mestoOpenButton,
-  popupProfile,
+  popupProfileSelector,
   profileName,
   profileAbout,
   nameInput,
   aboutInput,
-  formProfile,
   popupMesto,
   formMesto,
-  popupPhoto,
-  popupImg,
   elementsContainer,
-  popupPhotoTitle,
-  mestoName,
-  mestoLink,
+  selectors,
   avatarLink,
-  avatarInput,
   formAvatar,
   avatarOpenButton,
-  popupCloseButtons,
-  cardTemplate,
-  popupAvatar,
-  selectors
-};
+  popupAvatarSelector,
+  formProfile}
