@@ -128,8 +128,7 @@ const popupEditForm = new PopupWithForm(popupProfileSelector,
 //Открытие окна редактирования профиля
 profileOpenButton.addEventListener('click', function (){
   const info = userInfo.getUserInfo();
-  nameInput.value = info.name;
-  aboutInput.value = info.about;
+  popupEditForm.setInputValues({'profile-name':info.name,'profile-about':info.about});
   popupEditForm.open();
   profileFormValidator.resetValidation();
 });
