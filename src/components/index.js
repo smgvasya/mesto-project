@@ -106,10 +106,10 @@ const userInfo = new UserInfo({nameElementSelector: profileName,
                                avatarElementSelector: avatarLink});
 
 const popupEditForm = new PopupWithForm(popupProfileSelector,
-  (evt, { 'name': profileNewName, 'about':profileNewAbout })=>{
+  (evt, obj)=>{
     evt.preventDefault ();
     renderLoading (evt.target, true);
-    api.patchProfile({name: profileNewName, about:profileNewAbout})
+    api.patchProfile(obj)
       .then((res) =>{;
         userInfo.setUserInfo(res);
         popupEditForm.close();
@@ -132,10 +132,10 @@ profileOpenButton.addEventListener('click', function (){
 });
 
 const popupAvatarForm = new PopupWithForm(popupAvatarSelector,
-  (evt, {'avatar-link':avatarNewLink})=>{
+  (evt, obj)=>{
     evt.preventDefault();
     renderLoading (evt.target, true);
-    api.patchAvatar(avatarNewLink)
+    api.patchAvatar(obj)
       .then((res) =>{;
         userInfo.setUserInfo(res);
         popupAvatarForm.close();
@@ -151,10 +151,10 @@ const popupAvatarForm = new PopupWithForm(popupAvatarSelector,
 
 // Функция формы добавления карточки/очистка инпутов
 const popupEditMesto = new PopupWithForm(popupMesto,
-  (evt, { 'mesto-title': title, 'mesto-link': link }) => {
+  (evt, obj) => {
     evt.preventDefault ();
     renderLoading (evt.target, true)
-    api.postCard({name: title, link: link})
+    api.postCard(obj)
       .then((res) => {
         cardSection.setRenderItems([res]);
         cardSection.renderItems();
