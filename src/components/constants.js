@@ -4,8 +4,6 @@ const popupProfileSelector = '#popup-profile';
 
 const profileName ='.profile__name';
 const profileAbout = '.profile__about';
-const nameInput = document.querySelector('#input-name');
-const aboutInput = document.querySelector('#input-about');
 const formProfile = document.querySelector('#form-profile');
 const formMesto = document.querySelector("#edit-mesto");
 const popupMesto = '#popup-mesto';
@@ -31,8 +29,6 @@ export {profileOpenButton,
   popupProfileSelector,
   profileName,
   profileAbout,
-  nameInput,
-  aboutInput,
   popupMesto,
   formMesto,
   elementsContainer,

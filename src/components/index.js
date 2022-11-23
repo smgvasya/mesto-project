@@ -5,8 +5,6 @@ import {
   popupProfileSelector,
   profileName,
   profileAbout,
-  nameInput,
-  aboutInput,
   popupMesto,
   formMesto,
   elementsContainer,
@@ -60,7 +58,7 @@ const mestoFormValidator = new FormValidator(
   formMesto
 );
 
-const listenerDelCard = (obj) => {
+const setlistenerDelCard = (obj) => {
   api.deleteCard(obj.id)
   .then(() => {
     obj.getCard().remove();
@@ -70,7 +68,7 @@ const listenerDelCard = (obj) => {
   });
 }
 
-const listenerLikeCard = (evt, obj) => {
+const setlistenerLikeCard = (evt, obj) => {
   if (evt.target.classList.contains('element__button-like_active')) {
     api.deleteLike(obj.id)
     .then ((res) => {
@@ -90,14 +88,14 @@ const listenerLikeCard = (evt, obj) => {
     });
 }};
 
-const listenerClickCard = (photo) => {
+const setlistenerClickCard = (photo) => {
   photoPopup.open(photo);
 }
 
 const cardSection = new Section({
   items: [],
   renderer: (item) => {
-    const card = new Card(item, userInfo.getUserId(), Card.cardTemplate, listenerClickCard, listenerDelCard, listenerLikeCard);
+    const card = new Card(item, userInfo.getUserId(), Card.cardTemplate, setlistenerClickCard, setlistenerDelCard, setlistenerLikeCard);
     const cardElement = card.getCard();
     cardSection.addItem(cardElement);
   }
