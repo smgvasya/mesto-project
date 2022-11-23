@@ -106,7 +106,7 @@ const userInfo = new UserInfo({nameElementSelector: profileName,
                                avatarElementSelector: avatarLink});
 
 const popupEditForm = new PopupWithForm(popupProfileSelector,
-  (evt, { 'profile-name': profileNewName, 'profile-about':profileNewAbout })=>{
+  (evt, { 'name': profileNewName, 'about':profileNewAbout })=>{
     evt.preventDefault ();
     renderLoading (evt.target, true);
     api.patchProfile({name: profileNewName, about:profileNewAbout})
@@ -126,7 +126,7 @@ const popupEditForm = new PopupWithForm(popupProfileSelector,
 //Открытие окна редактирования профиля
 profileOpenButton.addEventListener('click', function (){
   const info = userInfo.getUserInfo();
-  popupEditForm.setInputValues({'profile-name':info.name,'profile-about':info.about});
+  popupEditForm.setInputValues(info);
   popupEditForm.open();
   profileFormValidator.resetValidation();
 });
