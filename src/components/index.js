@@ -32,16 +32,6 @@ const api = new Api({
   }
 });
 
-// Улучшенный UX всех форм
-function renderLoading(formElement, isLoading) {
-  const btnSubmit = formElement.querySelector(selectors.buttonSelector)
-  if (isLoading) {
-    btnSubmit.textContent = "Сохранение...";
-  } else {
-    btnSubmit.textContent = "Сохранить";
-  }
-}
-
 //Валидация для каждой фоормы
 const profileFormValidator = new FormValidator(
   selectors,
@@ -73,7 +63,6 @@ const setlistenerLikeCard = (evt, obj) => {
     api.deleteLike(obj.id)
     .then ((res) => {
       obj.setLikeCount(res.likes)
-
     })
     .catch((err) => {
       console.log(err);
@@ -105,10 +94,10 @@ const userInfo = new UserInfo({nameElementSelector: profileName,
                                infoElementSelector: profileAbout,
                                avatarElementSelector: avatarLink});
 
-const popupEditForm = new PopupWithForm(popupProfileSelector,
+const popupEditForm = new PopupWithForm(popupProfileSelector, selectors.buttonSelector,
   (evt, obj)=>{
     evt.preventDefault ();
-    renderLoading (evt.target, true);
+    popupEditForm.setBtnLabel(true);
     api.patchProfile(obj)
       .then((res) =>{;
         userInfo.setUserInfo(res);
@@ -118,7 +107,7 @@ const popupEditForm = new PopupWithForm(popupProfileSelector,
         console.log(err);
       })
       .finally(() => {;
-        renderLoading (evt.target, false);
+        popupEditForm.setBtnLabel(false);
       });
   }
 );
@@ -131,10 +120,10 @@ profileOpenButton.addEventListener('click', function (){
   profileFormValidator.resetValidation();
 });
 
-const popupAvatarForm = new PopupWithForm(popupAvatarSelector,
+const popupAvatarForm = new PopupWithForm(popupAvatarSelector, selectors.buttonSelector,
   (evt, obj)=>{
     evt.preventDefault();
-    renderLoading (evt.target, true);
+    popupAvatarForm.setBtnLabel(true);
     api.patchAvatar(obj)
       .then((res) =>{;
         userInfo.setUserInfo(res);
@@ -144,16 +133,16 @@ const popupAvatarForm = new PopupWithForm(popupAvatarSelector,
         console.log(err);
       })
       .finally(() => {;
-        renderLoading (evt.target, false);
+        popupAvatarForm.setBtnLabel(false);
       });
   }
 );
 
 // Функция формы добавления карточки/очистка инпутов
-const popupEditMesto = new PopupWithForm(popupMesto,
+const popupEditMesto = new PopupWithForm(popupMesto, selectors.buttonSelector,
   (evt, obj) => {
     evt.preventDefault ();
-    renderLoading (evt.target, true)
+    popupEditMesto.setBtnLabel(true)
     api.postCard(obj)
       .then((res) => {
         cardSection.setRenderItems([res]);
@@ -164,7 +153,7 @@ const popupEditMesto = new PopupWithForm(popupMesto,
         console.log(err)
       })
       .finally(() => {
-        renderLoading (evt.target, false)
+        popupEditMesto.setBtnLabel(false)
       });
   })
 
