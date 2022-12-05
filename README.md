@@ -31,8 +31,5 @@
 - API
 - Сборка Webpack
 
-# Адаптив
-Для отображения на устройствах 320px и 1280px.
-
 ---
 [Превьюшка](https://smgvasya.github.io/mesto-project/)
